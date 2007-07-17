@@ -1,0 +1,2 @@
+[ModuleSettings]
+ExtensionRepositories[]=collectexport
