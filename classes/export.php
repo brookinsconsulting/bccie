@@ -1,12 +1,12 @@
 <?php
 //
-// Definition of eZCollectExport ExportCSV Cronjob
+// Definition of CollectExport Export Methods
 //
-// CollectExport ExportCSV Cronjob
+// CollectExport Export Methods
 //
 // Created on: <01-Mar-2007 00:06:00 Graham Brookins>
-// Last Updated: <01-Mar-2007 00:06:20 Graham Brookins>
-// Version: 1.0.1
+// Last Updated: <19-Jul-2007 00:14:50 Graham Brookins>
+// Version: 1.0.2
 //
 // Copyright (C) 2001-2007 Brookins Consulting. All rights reserved.
 //
@@ -43,9 +43,8 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
   $ret = false;
   $object = false;
 
-
   // Settings
-  $ini = eZINI::instance( "cronjob.ini" );
+  $ini = eZINI::instance( "cie.ini" );
   $excludeAttributeID = $ini->variable( "ExportCollectionCSVSettings", "ExcludeAttributeID" );
 
 
@@ -72,7 +71,7 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
   }
 
   // Settings
-  $ini = eZINI::instance( "cronjob.ini" );
+  $ini = eZINI::instance( "cie.ini" );
   $excludeAttributeID = $ini->variable( "ExportCollectionCSVSettings", "ExcludeAttributeID" );
 
   if ( $debug )
@@ -155,13 +154,16 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
   switch( $format )
   {
     case 'csv':
-     $filename = $object->attribute( 'name' ) ."_export_". $date_export .".csv";
+     //$filename = $object->attribute( 'name' ) ."_export_". $date_export .".csv";
+     $filename = $object->attribute( 'name' ) ."_export.csv";
      break;
     case 'sylk':
-     $filename = $object->attribute( 'name' ) ."_export_". $date_export .".slk";
+     //$filename = $object->attribute( 'name' ) ."_export_". $date_export .".slk";
+     $filename = $object->attribute( 'name' ) ."_export.slk";
      break;
     default :
-     $filename = $object->attribute( 'name' ) ."_export_". $date_export .".csv";
+     //$filename = $object->attribute( 'name' ) ."_export_". $date_export .".csv";
+     $filename = $object->attribute( 'name' ) ."_export.csv";
      break;
   }
 
@@ -182,6 +184,7 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
   print_r("Object information collection record entries fetch in progress...\n");
 
   $parser = new Parser();
+  
   $data = $parser->exportInformationCollection( $collections, 
           $attributes_to_export, $separator,
           $format, $objectID );

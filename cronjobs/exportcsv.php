@@ -5,8 +5,8 @@
 // CollectExport ExportCSV Cronjob
 //
 // Created on: <01-Mar-2007 00:06:00 Graham Brookins>
-// Last Updated: <01-Mar-2007 00:06:20 Graham Brookins>
-// Version: 1.0.1
+// Last Updated: <19-Jul-2007 00:14:55 Graham Brookins>
+// Version: 1.0.2
 //
 // Copyright (C) 2001-2007 Brookins Consulting. All rights reserved.
 //
@@ -34,7 +34,7 @@ include_once( 'extension/collectexport/classes/export.php' );
 
 // Settings
 
-$ini = eZINI::instance( "cronjob.ini" );
+$ini = eZINI::instance( "cie.ini" );
 
 $debug = $ini->hasVariable( 'ExportCollectionCSVSettings', 'Debug' ) ? $ini->variable( 'ExportCollectionCSVSettings', 'Debug' ) == 'enabled' : false;
 
@@ -58,4 +58,5 @@ foreach ( $collection as $item )
     exportCollection( $collection_id, $dir, $format, $separator, $debug );
   }
 }
+
 ?>
