@@ -18,15 +18,12 @@
         <legend>{'Export'|i18n( 'design/collectexport/export' )}</legend>
 <div align="right"> 
 {section show=$collection_array}
-<input class="button" style="position:relative;top:-10px;" type="submit" name="DoExport" value="{'Do export'|i18n( 'design/col
-lectexport/export' )}" title="{'Do export.'|i18n( 'design/collectexport/export' )}" />
+<input class="button" style="position:relative;top:-10px;" type="submit" name="DoExport" value="{'Do export'|i18n( 'design/collectexport/export' )}" title="{'Do export.'|i18n( 'design/collectexport/export' )}" />
 {section-else}
-<input class="button-disabled" type="submit" name="DoExport" value="{'Do export'|i18n( 'd
-esign/collectexport/export' )}" disabled="disabled" />
+<input class="button-disabled" type="submit" name="DoExport" value="{'Do export'|i18n( 'design/collectexport/export' )}" disabled="disabled" />
 {/section}
 </div>
 </fieldset>
-
 
 {section show=$collection_array}
 {* Items per page selector. *}
