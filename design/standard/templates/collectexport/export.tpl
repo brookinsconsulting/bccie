@@ -95,7 +95,7 @@ esign/collectexport/export' )}" disabled="disabled" />
     </select>
 </fieldset>
 <fieldset>
-	<legend>{'Separation char for CVS export'|i18n('design/collectexport/export')}</legend>
+	<legend>{'Separation char for CSV export'|i18n('design/collectexport/export')}</legend>
 	<input type="radio" name="separation_char" checked="true" value=";"/> Semicolon (';') <br/>
 	<input type="radio" name="separation_char" value=","/> Comma (',') <br/>
 	<input type="radio" name="separation_char" value=":"/> Colon (':') <br/>
