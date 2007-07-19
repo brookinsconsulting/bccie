@@ -1,7 +1,5 @@
 <?php
 
-//require_once('kernel/infocollector/overview.php');
-
 include_once( 'kernel/common/template.php' );
 include_once( 'kernel/classes/ezpreferences.php' );
 include_once( 'kernel/classes/ezinformationcollection.php' );
@@ -14,6 +12,7 @@ if( !is_numeric( $offset ) )
 {
     $offset = 0;
 }
+
 
 if( $module->isCurrentAction( 'RemoveObjectCollection' ) && $http->hasPostVariable( 'ObjectIDArray' ) )
 {
@@ -74,7 +73,7 @@ $db =& eZDB::instance();
 $objects = $db->arrayQuery( 'SELECT DISTINCT ezinfocollection.contentobject_id,
                                     ezcontentobject.name,
                                     ezcontentobject_tree.main_node_id,
-                                    ezcontentclass.name AS class_name,
+                                    ezcontentclass.*,
                                     ezcontentclass.identifier AS class_identifier
                              FROM   ezinfocollection,
                                     ezcontentobject,
@@ -86,7 +85,13 @@ $objects = $db->arrayQuery( 'SELECT DISTINCT ezinfocollection.contentobject_id,
                              array( 'limit'  => (int)$limit,
                                     'offset' => (int)$offset ) );
 
-$infoCollectorObjectsQuery = $db->arrayQuery( 'SELECT COUNT( DISTINCT contentobject_id ) as count FROM ezinfocollection' );
+$infoCollectorObjectsQuery = $db->arrayQuery( 'SELECT COUNT( DISTINCT ezinfocollection.contentobject_id ) as count
+                                               FROM ezinfocollection,
+                                                    ezcontentobject,
+                                                    ezcontentobject_tree
+                                               WHERE
+                                                    ezinfocollection.contentobject_id=ezcontentobject.id
+                                                    AND ezinfocollection.contentobject_id=ezcontentobject_tree.contentobject_id' );
 $numberOfInfoCollectorObjects = 0;
 
 if ( $infoCollectorObjectsQuery )
@@ -94,7 +99,7 @@ if ( $infoCollectorObjectsQuery )
     $numberOfInfoCollectorObjects = $infoCollectorObjectsQuery[0]['count'];
 }
 
-for( $i=0; $i<count( $objects ); $i++ )
+foreach ( array_keys( $objects ) as $i )
 {
     $collections = eZInformationCollection::fetchCollectionsList( (int)$objects[$i]['contentobject_id'], /* object id */
                                                                   false, /* creator id */
@@ -104,6 +109,7 @@ for( $i=0; $i<count( $objects ); $i++ )
                                                                   false  /* asObject */
                                                                  );
 
+    $objects[$i]['class_name'] = eZContentClassNameList::nameFromSerializedString( $objects[$i]['serialized_name_list'] );
     $first = $collections[0]['created'];
     $last  = $first;
 
