@@ -92,7 +92,10 @@ echo ( '<hr />' );
 			    array_push($resultstring,"");
 			} else if ($attributeid != -2) {
 			    $attribute = & eZContentClassAttribute::fetch($attributeid);
-			    array_push($resultstring,$attribute->Name);
+			    array_push( $resultstring, $attribute->name() );
+
+			    // works for 3.8 only
+			    // array_push($resultstring,$attribute->Name);
 			}			
 		}
 		return $resultstring;
@@ -133,18 +136,21 @@ echo ( '<hr />' );
 	
     /* -------------- SYLK EXPORT ------------ */	
     	
-    function sylk($tableau)
+    function sylk( $tableau )
     {
        define("FORMAT_REEL",   1); // #,##0.00
        define("FORMAT_ENTIER", 2); // #,##0
        define("FORMAT_TEXTE",  3); // @
+
        $cfg_formats[FORMAT_ENTIER] = "FF0";
        $cfg_formats[FORMAT_REEL]   = "FF2";
        $cfg_formats[FORMAT_TEXTE]  = "FG0";
+
        if ($tableau)
        {
           // en-t? du fichier SYLK
-          $sylkcontent = "ID;Atchoum Production\n"; // ID;Pappli
+          // $sylkcontent = "ID;Atchoum Production\n"; // ID;Pappli
+ 	  $sylkcontent = "ID;Pcie\n"; // ID;Pappli
           $sylkcontent = $sylkcontent."\n";
           // formats
           $sylkcontent = $sylkcontent."P;PGeneral\n";     
