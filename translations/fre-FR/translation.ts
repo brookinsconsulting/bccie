@@ -41,7 +41,7 @@
         <translation>Type d'export</translation>
     </message>
     <message>
-        <source>Separation char for CVS export</source>
+        <source>Separation char for CSV export</source>
         <translation>Séparateur pour l'export CSV</translation>
     </message>
     <message>
