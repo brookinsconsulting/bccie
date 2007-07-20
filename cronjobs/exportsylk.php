@@ -34,7 +34,7 @@ include_once( 'extension/collectexport/classes/export.php' );
 
 // Settings
 
-$ini = eZINI::instance( "cei.ini" );
+$ini = eZINI::instance( "cie.ini" );
 
 $debug = $ini->hasVariable( 'ExportCollectionSylkSettings', 'Debug' ) ? $ini->variable( 'ExportCollectionSylkSettings', 'Debug' ) == 'enabled' : false;
 

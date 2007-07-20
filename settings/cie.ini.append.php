@@ -13,7 +13,6 @@ Directory=var/export
 
 # Export Format
 Format=csv
-# Format=sylk
 
 # Export Separator
 Separator=;
@@ -24,8 +23,6 @@ Separator=;
 
 # Collections to export to file
 Collection[]
-#Collection[]=206
-#Collection[]=207
 #Collection[]=3248
 #Collection[]=2055
 #Collection[]=3250
@@ -49,7 +46,6 @@ Directory=var/export
 
 # Export Format
 Format=sylk
-# Format=csv
 
 # Export Separator
 Separator=;
@@ -60,8 +56,6 @@ Separator=;
 
 # Collections to export to file
 Collection[]
-#Collection[]=206
-#Collection[]=207
 #Collection[]=3248
 #Collection[]=2055
 #Collection[]=3250

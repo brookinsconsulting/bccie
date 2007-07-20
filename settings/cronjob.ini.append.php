@@ -7,8 +7,8 @@ ExtensionDirectories[]=collectexport
 Scripts[]
 Scripts[]=exportcsv.php
 
-[CronjobPart-exportslyk]
+[CronjobPart-exportsylk]
 Scripts[]
-Scripts[]=exportslyk.php
+Scripts[]=exportsylk.php
 
 */ ?>
