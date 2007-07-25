@@ -16,8 +16,7 @@ var $exportableDatatypes;
 			include_once("extension/collectexport/modules/collectexport/".$ini->variable($typename, 'HandlerFile'));
 			$classname = $ini->variable($typename, 'HandlerClass'); 
 			$handler = new $classname;
-			$this->handlerMap[$typename]=array("handler" => $handler,
-						"exportable" => true);
+			$this->handlerMap[$typename]=array("handler" => $handler, "exportable" => true);
 		}
 	}
 	
@@ -28,39 +27,32 @@ var $exportableDatatypes;
 	function exportAttribute(&$attribute, $seperationChar) {
             $ret = false;
 	    $objectAttribute = $attribute->contentObjectAttribute();
-		$handler=$this->handlerMap[$objectAttribute->DataTypeString]['handler'];
+	    $handler=$this->handlerMap[$objectAttribute->DataTypeString]['handler'];
 
-/*
+	    /*
+		BC: Error Debug Comment Test Case Output
 
-BC: Error Debug Comment Test Case Output
+                echo ( '<hr />' );
+                print_r( $objectAttribute->DataTypeString );
+                echo ( '<hr />' );
+                print_r( $objectAttribute );
+                echo ( '<hr />' );		
+                print_r( $this->handlerMap );
+                echo ( '<hr />' );
+	    */
 
-echo ( '<hr />' );
+	    if( $attribute && $seperationChar )
+	    { 
+	      if( is_object( $handler ) )
+	      {
+		if( $handler->exportAttribute($attribute, $seperationChar) )
+		  $ret = $handler->exportAttribute($attribute, $seperationChar);
+	      }
+	    } else {
+	      $ret = false;
+	    }
 
-print_r( $objectAttribute->DataTypeString );
-
-echo ( '<hr />' );
-
-print_r( $objectAttribute );
-
-echo ( '<hr />' );		
-
-print_r( $this->handlerMap );
-
-echo ( '<hr />' );
-*/
-
-        if( $attribute && $seperationChar )
-        { 
-          if( is_object( $handler ) )
-          {
-            if( $handler->exportAttribute($attribute, $seperationChar) )
-            $ret = $handler->exportAttribute($attribute, $seperationChar);
-          }
-        } else {
-          $ret = false;
-        }
-
-	return $ret;	
+	    return $ret;	
 	}
 
 	function exportCollectionObject(&$collection, &$attributes_to_export, $seperationChar) {
@@ -102,31 +94,107 @@ echo ( '<hr />' );
 	}
 
 
-	function exportInformationCollection( $collections, $attributes_to_export, $seperationChar, $export_type='csv') {
+	function exportInformationCollection( $collections, $attributes_to_export, $seperationChar, $export_type='csv', $days ) {
 
         // eZDebug::writeDebug($attributes_to_export);
 
         switch($export_type){
             case "csv" :
 		        $returnstring = array();
+			// TODO: Refactor foreach into method
         		foreach ($collections as $collection) {
-        			array_push($returnstring, $this->exportCollectionObject($collection, $attributes_to_export, $seperationChar));
+			  if( $days != false )
+			  {
+			      $current_datestamp = strtotime("now");
+			      $ci_created = $collection->Created;
+			      $range  = mktime(0, 0, 0, date("m")  , date("d")-$days, date("Y"));
+
+			      /*
+			         print_r( $collection );
+				 print_r( "\n##################################" );
+                                 print_r( "\nDate: $current_datestamp". strtotime("now") );
+                                 print_r( "\nCreated: $ci_created" );
+                                 print_r( "\nDays: $days | $range" );
+			         print_r( "\n##################################" );
+			         // die();
+			      */
+
+			      if( $ci_created < $current_datestamp && $ci_created >= $range ){
+				// print_r( "\nCI Date is lt current date and CI Date is gt eq range \n" );
+				array_push($returnstring, $this->exportCollectionObject($collection, $attributes_to_export, $seperationChar));
+			      }
+			    }
+                          else
+			    {
+			      array_push($returnstring, $this->exportCollectionObject($collection, $attributes_to_export, $seperationChar));
+			    }
+
+			  // array_push($returnstring, $this->exportCollectionObject($collection, $attributes_to_export, $seperationChar));
+
         		}
         		return $this->csv($returnstring,$seperationChar);
         		break;            
             case "sylk":
                 $returnstring = array();
                 array_push($returnstring, $this->exportCollectionObjectHeader($attributes_to_export));
+			// TODO: Refactor foreach into method
         		foreach ($collections as $collection) {
-        			array_push($returnstring, $this->exportCollectionObject($collection, $attributes_to_export, $seperationChar));
+			  if( $days != false )
+			  {
+			    $current_datestamp = strtotime("now");
+			    $ci_created = $collection->Created;
+			    $range  = mktime(0, 0, 0, date("m")  , date("d")-$days, date("Y"));
+			    /*
+                                 print_r( $collection );
+                                 print_r( "\n##################################" );
+                                 print_r( "\nDate: $current_datestamp". strtotime("now") );
+                                 print_r( "\nCreated: $ci_created" );
+                                 print_r( "\nDays: $days | $range" );
+                                 print_r( "\n##################################" );
+                                 // die();
+			    */
+
+			    if( $ci_created < $current_datestamp && $ci_created >= $range ){
+			      // print_r( "\nCI Date is lt current date and CI Date is gt eq range \n" );
+			      array_push($returnstring, $this->exportCollectionObject($collection, $attributes_to_export, $seperationChar));
+			    }
+			  }
+			  else
+			  {
+			    array_push($returnstring, $this->exportCollectionObject($collection, $attributes_to_export, $seperationChar));
+			  }
         		}
         		return $this->sylk($returnstring);
         		break;            
         	default:
         	    $export_type='csv';
 		        $returnstring = array();
+			// TODO: Refactor foreach into method
         		foreach ($collections as $collection) {
-        			array_push($returnstring, $this->exportCollectionObject($collection, $attributes_to_export, $seperationChar));
+                          if( $days != false )
+			  {
+			      $current_datestamp = strtotime("now");
+			      $ci_created = $collection->Created;
+			      $range  = mktime(0, 0, 0, date("m")  , date("d")-$days, date("Y"));
+			      /*
+                                 print_r( $collection );
+                                 print_r( "\n##################################" );
+                                 print_r( "\nDate: $current_datestamp". strtotime("now") );
+                                 print_r( "\nCreated: $ci_created" );
+                                 print_r( "\nDays: $days | $range" );
+                                 print_r( "\n##################################" );
+                                 // die();
+			      */
+			      
+			      if( $ci_created < $current_datestamp && $ci_created >= $range ){
+				// print_r( "\nCI Date is lt current date and CI Date is gt eq range \n" );
+				array_push($returnstring, $this->exportCollectionObject($collection, $attributes_to_export, $seperationChar));
+			      }
+			  }
+                          else
+			  {
+			      array_push($returnstring, $this->exportCollectionObject($collection, $attributes_to_export, $seperationChar));
+			  }
         		}
         		return $this->csv($returnstring,$seperationChar);
         		break;            
@@ -138,9 +206,14 @@ echo ( '<hr />' );
     	
     function sylk( $tableau )
     {
-       define("FORMAT_REEL",   1); // #,##0.00
-       define("FORMAT_ENTIER", 2); // #,##0
-       define("FORMAT_TEXTE",  3); // @
+         if( !defined( 'FORMAT_REEL' ) )
+	   define("FORMAT_REEL",   1); // #,##0.00
+
+	 if( !defined( 'FORMAT_ENTIER' ) )
+	   define("FORMAT_ENTIER", 2); // #,##0
+
+         if( !defined( 'FORMAT_TEXTE' ) )
+	   define("FORMAT_TEXTE",  3); // @
 
        $cfg_formats[FORMAT_ENTIER] = "FF0";
        $cfg_formats[FORMAT_REEL]   = "FF2";
@@ -176,27 +249,55 @@ echo ( '<hr />' );
           // r?p?tion des infos de formatage des colonnes
           for($cpt=0; $cpt< $nbcol;$cpt++)
           {
-             switch(gettype($tableau[1][$cpt]))
-             {
-                case "integer":
-                   $num_format[$cpt]=FORMAT_ENTIER;   
-                $format[$cpt]= $cfg_formats[$num_format[$cpt]]."R";
-                break;
-                case "double":
-                   $num_format[$cpt]=FORMAT_REEL;   
-                $format[$cpt]= $cfg_formats[$num_format[$cpt]]."R";
-                break;
-                default:
-                $num_format[$cpt]=FORMAT_TEXTE;   
-                $format[$cpt]= $cfg_formats[$num_format[$cpt]]."L";
-                break;
-             }   
+	     if( isset( $tableau[1][$cpt] ) )
+	     {
+	       switch(gettype($tableau[1][$cpt]))
+	       {
+                 case "integer":
+                     $num_format[$cpt]=FORMAT_ENTIER;   
+		     $format[$cpt]= $cfg_formats[$num_format[$cpt]]."R";
+                 break;
+                 case "double":
+		     $num_format[$cpt]=FORMAT_REEL;   
+		     $format[$cpt]= $cfg_formats[$num_format[$cpt]]."R";
+                 break;
+                 default:
+		     $num_format[$cpt]=FORMAT_TEXTE;   
+		     $format[$cpt]= $cfg_formats[$num_format[$cpt]]."L";
+                 break;
+	       }
+	     }
           }
           // largeurs des colonnes
           for ($cpt = 1; $cpt <= $nbcol; $cpt++)
           {
              for($t=0;$t < count($tableau);$t++)
-                $tmpo[$t]= strlen($tableau[$t][$cpt-1]);
+	     {  
+	       // $tmpo[$t]= strlen($tableau[$t][$cpt-1]);
+	       if( isset( $tableau[$t] ) )
+	       {
+		 if( isset( $tableau[$t][$cpt-1] ) )
+		 {
+		   $tmpo[$t] = strlen($tableau[$t][$cpt-1]);
+		 }
+	       }
+	     }
+
+	     /*
+	     if( !isset( $tableau[$t] ) )
+	     {
+	       $xyz = $cpt-1;
+	       print_r( "TTD: $t | " . $xyz ."\n" );
+	       // print_r( $tableau[$t] );
+	     }
+	     */
+	     // print_r( $tableau[$t][$cpt-1] );
+	     /*
+	     print_r( $tmpo );
+	     print_r( max($tmpo) );
+	     die( $tmpo );
+	     */
+
              $taille=max($tmpo);
              if ($taille==0)
                 $taille=1;
@@ -223,14 +324,36 @@ echo ( '<hr />' );
              // parcours des champs
              for ($cpt = 0; $cpt < $nbcol; $cpt++)
              {
+	       // print_r( $num_format[$cpt] );
+	       // print_r( $format[$cpt] );
+	       
+	       if( isset( $format[$cpt] ) && isset( $format[$cpt] ) )
+	       {
                 // format
                 $sylkcontent = $sylkcontent."F;P".$num_format[$cpt].";".$format[$cpt];
                 $sylkcontent = $sylkcontent.($cpt == 0 ? ";Y".$ligne : "").";X".($cpt+1)."\n";
+
                 // valeur
                 if ($num_format[$cpt] == FORMAT_TEXTE)
-                   $sylkcontent = $sylkcontent."C;N;K\"".str_replace(';', ';;', $tableau[$i][$cpt])."\"\n";
-                else
-                   $sylkcontent = $sylkcontent."C;N;K".$tableau[$i][$cpt]."\n";
+		{
+		  // $sylkcontent = $sylkcontent."C;N;K\"".str_replace(';', ';;', $tableau[$i][$cpt])."\"\n";
+		  // if( isset( $tableau[$t] ) )
+
+
+		  if( isset( $tableau[$i] ) )
+		  {
+		    if( isset( $tableau[$i][$cpt] ) )
+		    {
+		      $sylkcontent = $sylkcontent."C;N;K\"".str_replace(';', ';;', $tableau[$i][$cpt])."\"\n";
+		    }
+		  }
+		  // $sylkcontent = $sylkcontent."C;N;K\"".str_replace(';', ';;', $tableau[$i][$cpt])."\"\n";
+                } 
+		else
+                {
+		   $sylkcontent = $sylkcontent."C;N;K".$tableau[$i][$cpt]."\n";
+		}
+	       }
              }
              $sylkcontent = $sylkcontent."\n";
              $ligne++;
@@ -240,39 +363,38 @@ echo ( '<hr />' );
           return $sylkcontent;
        }else
           return false;
-    }	
+    }
 
+    /*
+      CSV EXPORT
+    */
 
-
-    /* -------------- CSV EXPORT ------------ */	
-
-
-
-    function csv($tableau, $seperator)
+    function csv( $tableau, $seperator )
     {
-        if ($tableau) {
+        if ( $tableau )
+	{
             $line="truc";
             for($i=0;$i < count($tableau) ;$i++)
                 $tmp[$i]=count($tableau[$i]);
             $nbcol=max($tmp);
 
-          $line = "";
+	    $line = "";
           
-          for($i=0;$i< count($tableau);$i++)
-          {
-             // parcours des champs
-             for ($cpt = 0; $cpt < $nbcol; $cpt++)
-             {
-                $line .= trim($tableau[$i][$cpt]) . $seperator;
-             }
-             $line .= "\n";
-          }
-            return $line;
+	    for($i=0;$i< count($tableau);$i++)
+	    {
+	        // parcours des champs
+	        for ($cpt = 0; $cpt < $nbcol; $cpt++)
+                {
+		    if( isset( $tableau[$i][$cpt] ) )
+		    {
+		      $line .= trim($tableau[$i][$cpt]) . $seperator;
+		    }
+	        }
+		$line .= "\n";
+	    }
+	    return $line;
         }
-    }	
-
-
-
+    }
 	
 }
 ?>
