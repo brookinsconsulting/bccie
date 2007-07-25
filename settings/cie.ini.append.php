@@ -1,68 +1,55 @@
 <?php /* #?ini charset="utf8"?
 
-[ExportCollectionCSVSettings]
-# Debug=enabled
+[CieSettings]
+# Cronjob debug output
 Debug=disabled
 
-# Export Log File
-Log=var/log/exportcsv.log
+# Log File
+Log=var/log/cie.log
+
+# Log Debug Output (Reserved but not used)
 LogDebug=disabled
 
 # Export Directory
 Directory=var/export
 
-# Export Format
-Format=csv
+# Export only records created in the last n of days
+# ExportLimitedRange=disabled
+ExportLimitedRange=disabled
 
-# Export Separator
-Separator=;
-# Separator=|
-# Separator=,
-# Separator=:
-# Separator=#
+# Number of days in the past to export. Must enable, 'ExportLimitedRange' to use
+DateRangeToExport=7
 
-# Collections to export to file
+# Remove records after export (Required but not implemented)
+# RemoveExported=enabled
+RemoveExported=disabled
+
+# Collections to export, Array of IDs
 Collection[]
-#Collection[]=3248
-#Collection[]=2055
-#Collection[]=3250
+# Collection[]=4242
+# Collection[]=2442
+# Collection[]=2424
 
+# Collection attributes to exclude, Array of IDs
 ExcludeAttributeID[]
 # ExcludeAttributeID[]=001
 # ExcludeAttributeID[]=002
 # ExcludeAttributeID[]=003
 
+# Csv Export Format
+CsvFormat=csv
 
-[ExportCollectionSylkSettings]
-# Debug=enabled
-Debug=disabled
+# Csv Export Separator
+CsvSeparator=;
+# CsvSeparator=|
+# CsvSeparator=,
+# CsvSeparator=:
+# CsvSeparator=#
 
-# Export Log File
-Log=var/log/exportsylk.log
-LogDebug=disabled
+# Sylk Export Format
+SylkFormat=sylk
 
-# Export Directory
-Directory=var/export
-
-# Export Format
-Format=sylk
-
-# Export Separator
-Separator=;
-# Separator=|
-# Separator=,
-# Separator=:
-# Separator=#
-
-# Collections to export to file
-Collection[]
-#Collection[]=3248
-#Collection[]=2055
-#Collection[]=3250
-
-ExcludeAttributeID[]
-# ExcludeAttributeID[]=001
-# ExcludeAttributeID[]=002
-# ExcludeAttributeID[]=003
+# Sylk Export Separator
+SylkSeparator=;
 
 */ ?>
