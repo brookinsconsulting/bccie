@@ -4,11 +4,16 @@ Collected Information Export
 This module allows for easy export collected informations 
 from contentobjects to csv or sylk (Excel) files.
 
+
+Install
+-------
+
 Just install the module, and a new menu "Export" will appear.
+
 
 Legal
 -----
-Written and copyrighted by Mathias VITALIS.
-Released under the GNU General Public License V2 or later.
-(if you have special licensing requirements, feel free to contact me and
-we'll work out a deal)
+
+Written and copyrighted by Mathias VITALIS and Brookins Consulting
+
+Released under the GNU General Public License v2 or later.
