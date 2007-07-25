@@ -1,0 +1,8 @@
+TODO
+
+- Add: Remove exported (c.i.) items after export
+- Add: Settings: Export Collection ID (Example: csv export already offers this feature without setting, yet sylk export is not consistent)
+- Add: Settings: Export Collection Created Date
+- Add: Export to 'vcf' format
+- Add: Detection of corrupted (c.i.) (When class attributes don't match per record)
+- Rename: Extension name, to 'cie'
