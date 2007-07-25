@@ -32,21 +32,46 @@
 include_once( 'kernel/classes/ezcontentclass.php' );
 include_once( 'kernel/classes/ezinformationcollection.php' );
 include_once( 'lib/ezutils/classes/ezhttptool.php' );
-include_once( 'extension/collectexport/modules/collectexport/parser.php' );
 include_once( 'lib/ezutils/classes/ezexecution.php' );
+include_once( 'extension/collectexport/modules/collectexport/parser.php' );
+
+
+/*
+  Export Collections
+*/
+
+function exportCollections( $collections, $dir='var/export', $format='csv', $separator=',', $days=false, $remove=false, $debug=false )
+{
+  foreach ( $collections as $collection_id )
+  {
+    if ( $debug )
+    {
+      print_r("Object Collection ID For Export: $item" ."\n");
+    }
+    if ( is_numeric( $collection_id ) )
+    {
+      exportCollection( $collection_id, $dir, $format, $separator, $days, $debug );
+    }
+    if ( $debug )
+    {
+      print_r("Object Collections Export Finished!\n");
+    }
+  }
+}
+
 
 /*
   Exports Object Collection to File
 */
-function exportCollection( $objectID=false, $dir='var/export', $format='csv', $separator=',', $debug=false )
+
+function exportCollection( $objectID=false, $dir='var/export', $format='csv', $separator=',', $days=false, $debug=false )
 {
   $ret = false;
   $object = false;
 
   // Settings
   $ini = eZINI::instance( "cie.ini" );
-  $excludeAttributeID = $ini->variable( "ExportCollectionCSVSettings", "ExcludeAttributeID" );
-
+  $excludeAttributeID = $ini->variable( "CieSettings", "ExcludeAttributeID" );
 
   if( is_numeric( $objectID ) )
   {
@@ -61,7 +86,7 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
     $class =& eZContentClass::fetch( $classID );
   }
 
-  if ( $debug )
+  if ( $debug == true )
     echo "Object ClassID: $classID\n";
 
   if( is_object( $class ) )
@@ -72,32 +97,27 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
 
   // Settings
   $ini = eZINI::instance( "cie.ini" );
-  $excludeAttributeID = $ini->variable( "ExportCollectionCSVSettings", "ExcludeAttributeID" );
+  $excludeAttributeID = $ini->variable( "CieSettings", "ExcludeAttributeID" );
 
-  if ( $debug )
+  if ( $debug == true )
   {
     echo "Exporting Collection: $objectID\n";
     echo "Output Directory: $dir\n";
     echo "Output Format: $format\n";
     echo "Output Separator: $separator\n";
     echo "Object Collection ID: $objectID\n";
+    echo "Object Class Name: $className\n";
   }
 
-  if ( $debug )
-    echo "Object Class Name: $className\n";
-
-
+  // if ( $debug == true )
   // print_r( $classDataMap );
   // print_r( $class );
   // die( );
 
-
   if( !$object )
   {
-    // return false;
     die('Encountered Non-Object, Unknown Error');
   }
-
 
   $collections = eZInformationCollection::fetchCollectionsList(
                  $objectID,
@@ -105,18 +125,14 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
                  false,
                  array() );
 
-  if ( $debug )
+  $collection_count = eZInformationCollection::fetchCollectionCountForObject( $objectID );
+
+  if ( $debug == true )
   {  
+     echo "Object Collection Count: $collection_count\n\n";
      echo "Object Collection Contents: \n";
      print_r( $collections ); 
   }
-
-
-  $collection_count = eZInformationCollection::fetchCollectionCountForObject( $objectID );
-
-  if ( $debug )
-    echo "Object Collection Count: $collection_count\n\n";
-
 
   $attributes_to_export = array();
 
@@ -147,36 +163,41 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
     }
   }
 
-  // Set output file date
-  $date_export = date("Y_m_d_H_i__s");
+  // Set output file name pattern
+  if( $days != false )
+  {
+    $start  = mktime(0, 0, 0, date("m")  , date("d")-$days, date("Y"));
+    $namePattern = "_" . date("Y-m-d", $start) . "_to_" . date("Y-m-d");
+  }
+  else
+  {
+    $namePattern = "_export_" . date("Y-m-d_H-i");
+  }
 
-  // Set output format type name
+  // Set output file name
   switch( $format )
   {
     case 'csv':
-     //$filename = $object->attribute( 'name' ) ."_export_". $date_export .".csv";
-     $filename = $object->attribute( 'name' ) ."_export.csv";
-     break;
+      $filename = $object->attribute( 'name' ) . $namePattern . ".csv";
+      break;
     case 'sylk':
-     //$filename = $object->attribute( 'name' ) ."_export_". $date_export .".slk";
-     $filename = $object->attribute( 'name' ) ."_export.slk";
-     break;
+      $filename = $object->attribute( 'name' ) . $namePattern . ".slk";
+      break;
     default :
-     //$filename = $object->attribute( 'name' ) ."_export_". $date_export .".csv";
-     $filename = $object->attribute( 'name' ) ."_export.csv";
-     break;
+      $filename = $object->attribute( 'name' ) . $namePattern . ".csv";
+      break;
   }
 
   $sdir = $dir.'/';
   $path = $sdir.$filename;
 
-  if ( $debug )
+  if ( $debug == true )
   {
     echo "Collection Output Filename: $filename\n";
     echo "Collection Output Path: $path\n";
   }
 
-  if ( $debug )
+  if ( $debug == true )
   {   echo "Class Attributes ot Export (Array): \n";
       print_r( $attributes_to_export ); echo "\n";
   }
@@ -184,13 +205,11 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
   print_r("Object information collection record entries fetch in progress...\n");
 
   $parser = new Parser();
-  
   $data = $parser->exportInformationCollection( $collections, 
           $attributes_to_export, $separator,
-          $format, $objectID );
+          $format, $days );
 
-
-  if ( $debug )
+  if ( $debug == true )
   {
     echo "Collection Output Content:\n";
     echo( "$data\n" );
@@ -200,7 +219,6 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
 
   $file = new eZFile();
   $file->create( $filename, $dir, $data );
-
 
   print_r("Object Collection Data Export File Path: $path\n");
   print_r("Object Collection Export Completed!\n\n");
