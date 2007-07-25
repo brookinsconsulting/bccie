@@ -32,31 +32,28 @@
 include_once( 'lib/ezutils/classes/ezini.php' );
 include_once( 'extension/collectexport/classes/export.php' );
 
+
 // Settings
 
 $ini = eZINI::instance( "cie.ini" );
 
-$debug = $ini->hasVariable( 'ExportCollectionCSVSettings', 'Debug' ) ? $ini->variable( 'ExportCollectionCSVSettings', 'Debug' ) == 'enabled' : false;
+$debug = $ini->hasVariable( 'CieSettings', 'Debug' ) ? $ini->variable( 'CieSettings', 'Debug' ) == 'enabled' : false;
+$collection = $ini->variable( "CieSettings", "Collection" );
+$dir = $ini->variable( "CieSettings", "Directory" );
+$format = $ini->variable( "CieSettings", "CsvFormat" );
+$separator = $ini->variable( "CieSettings", "CsvSeparator" );
+$limitedRange = $ini->variable( "CieSettings", "ExportLimitedRange" ) == 'enabled' ? true : false;
+$removeExported = $ini->variable( "CieSettings", "RemoveExported" ) == 'enabled' ? true : false;
 
-$collection = $ini->variable( "ExportCollectionCSVSettings", "Collection" );
-$dir = $ini->variable( "ExportCollectionCSVSettings", "Directory" );
-$format = $ini->variable( "ExportCollectionCSVSettings", "Format" );
-$separator = $ini->variable( "ExportCollectionCSVSettings", "Separator" );
+if( $limitedRange == true ) {
+    $days = $ini->variable( "CieSettings", "DateRangeToExport" );
+} else {
+    $days = false;
+}
 
 
 // Export collections
 
-foreach ( $collection as $item )
-{
-  if ( $debug )
-  {
-    print_r("Object Collection ID For Export: $item" ."\n");
-  }
-  if ( is_numeric( $item ) )
-  {
-    $collection_id = $item;
-    exportCollection( $collection_id, $dir, $format, $separator, $debug );
-  }
-}
+exportCollections( $collection, $dir, $format, $separator, $days, $removeExported, $debug );
 
 ?>
