@@ -74,17 +74,20 @@ var $exportableDatatypes;
 		return $resultstring;
 	}
 
-	function exportCollectionObjectHeader(&$attributes_to_export) {
+	function exportCollectionObjectHeader( &$attributes_to_export ) {
 		$resultstring = array();
-		foreach($attributes_to_export as $attributeid)
+		foreach( $attributes_to_export as $attributeid )
 		{
-			if ($attributeid == "contentobjectid") {
-				array_push($resultstring,"ID");
-			} else if ($attributeid == -1) {
-			    array_push($resultstring,"");
-			} else if ($attributeid != -2) {
-			    $attribute = & eZContentClassAttribute::fetch($attributeid);
-			    array_push( $resultstring, $attribute->name() );
+			if ( $attributeid == "contentobjectid" ) {
+				array_push( $resultstring, "ID" );
+			} else if ( $attributeid == -1 ) {
+			    array_push( $resultstring, "" );
+			} else if ( $attributeid != -2 ) {
+			    $attribute = & eZContentClassAttribute::fetch( $attributeid );
+                            $attribute_name = $attribute->name();
+                            $attribute_name_escaped = preg_replace( "(\r\n|\n|\r)", " ", $attribute_name );
+                            $attribute_name_escaped = utf8_decode( $attribute_name_escaped );
+                            array_push( $resultstring, $attribute_name_escaped );   
 
 			    // works for 3.8 only
 			    // array_push($resultstring,$attribute->Name);
