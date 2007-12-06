@@ -16,6 +16,44 @@
 
 <fieldset>
         <legend>{'Export'|i18n( 'design/collectexport/export' )}</legend>
+<div class="block">
+<div class="element">
+{'Start Date'|i18n( 'design/collectexport/export' )}
+</div>
+
+<div class="element">
+<label>{'Day'|i18n( 'design/collectexport/export' )}:</label>
+<input name="start_day" class="box" size="3" value="{$start_day|wash}" />
+</div>
+
+<div class="element">
+<label>{'Month'|i18n( 'design/collectexport/export' )}:</label>
+<input  name="start_month" class="box" size="3" value="{$start_month|wash}" />
+</div>
+
+<div class="element">
+<label>{'Year'|i18n( 'design/collectexport/export' )}:</label>
+<input name="start_year" class="box" size="5" value="{$start_year|wash}" />
+</div>
+<div class="element">
+{'End Date'|i18n( 'design/collectexport/export' )}
+</div>
+
+<div class="element">
+<label>{'Day'|i18n( 'design/collectexport/export' )}:</label>
+<input name="end_day" class="box" size="3" value="{$end_day|wash}" />
+</div>
+
+<div class="element">
+<label>{'Month'|i18n( 'design/collectexport/export' )}:</label>
+<input  name="end_month" class="box" size="3" value="{$end_month|wash}" />
+</div>
+
+<div class="element">
+<label>{'Year'|i18n( 'design/collectexport/export' )}:</label>
+<input name="end_year" class="box" size="5" value="{$end_year|wash}" />
+</div>
+</div>
 <div align="right"> 
 {section show=$collection_array}
 <input class="button" style="position:relative;top:-10px;" type="submit" name="DoExport" value="{'Do export'|i18n( 'design/collectexport/export' )}" title="{'Do export.'|i18n( 'design/collectexport/export' )}" />

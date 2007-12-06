@@ -108,8 +108,8 @@ foreach ( array_keys( $objects ) as $i )
                                                                   false, /* sortArray */
                                                                   false  /* asObject */
                                                                  );
-
-    $objects[$i]['class_name'] = eZContentClassNameList::nameFromSerializedString( $objects[$i]['serialized_name_list'] );
+    $class = new eZContentClass( $objects[$i] );
+    $objects[$i]['class_name'] = $class->attribute( 'name' );
     $first = $collections[0]['created'];
     $last  = $first;
 

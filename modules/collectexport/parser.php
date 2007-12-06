@@ -24,10 +24,10 @@ var $exportableDatatypes;
 		return $this->exportableDatatypes;
 	}
 	
-	function exportAttribute(&$attribute, $seperationChar) {
-            $ret = false;
-	    $objectAttribute = $attribute->contentObjectAttribute();
-	    $handler=$this->handlerMap[$objectAttribute->DataTypeString]['handler'];
+	function exportAttribute(&$attribute, $seperationChar)
+	{
+
+	    $handler=$this->handlerMap[eZContentClassAttribute::dataTypeByID( $attribute->ContentClassAttributeID )]['handler'];
 
 	    /*
 		BC: Error Debug Comment Test Case Output
@@ -41,18 +41,14 @@ var $exportableDatatypes;
                 echo ( '<hr />' );
 	    */
 
-	    if( $attribute && $seperationChar )
+	    if( $attribute && $seperationChar && is_object( $handler ))
 	    { 
-	      if( is_object( $handler ) )
-	      {
-		if( $handler->exportAttribute($attribute, $seperationChar) )
-		  $ret = $handler->exportAttribute($attribute, $seperationChar);
-	      }
-	    } else {
-	      $ret = false;
+            $ret = $handler->exportAttribute($attribute, $seperationChar);
 	    }
-
-	    return $ret;	
+        if ( is_null( $ret ) )
+	       return false;
+	    else
+	       return $ret;	
 	}
 
 	function exportCollectionObject(&$collection, &$attributes_to_export, $seperationChar) {
@@ -64,8 +60,10 @@ var $exportableDatatypes;
 			    array_push($resultstring,"");
 			} else if ($attributeid != -2) {
 				$attributes=$collection->informationCollectionAttributes();
-				foreach ($attributes as $currentattribute) {
-					if ( ((int) $attributeid)== ((int) $currentattribute->ContentClassAttributeID) ) {
+				foreach ($attributes as $currentattribute)
+				{
+					if ( ((int) $attributeid)== ((int) $currentattribute->ContentClassAttributeID) )
+					{
 					    array_push($resultstring,$this->exportAttribute($currentattribute, $seperationChar));
 					}
 				}

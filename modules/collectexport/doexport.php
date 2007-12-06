@@ -24,10 +24,37 @@ if( !$object )
     return $module->handleError( EZ_ERROR_KERNEL_NOT_AVAILABLE, 'kernel' );
 }
 
-$collections = eZInformationCollection::fetchCollectionsList( $objectID, /* object id */
-                                                              false, /* creator id */
-                                                              false, /* user identifier */
-                                                              array() /* limit array */ );
+$conditions = array( 'contentobject_id' => $objectID  );
+
+$start = false;
+$end = false;
+if ( eZHTTPTool::hasPostVariable( "start_year" ) )
+{
+    $start = mktime( 0,0,0, (int)eZHTTPTool::postVariable("start_month"), (int)eZHTTPTool::postVariable("start_day"), (int)eZHTTPTool::postVariable("start_year") );
+}
+if ( eZHTTPTool::hasPostVariable( "end_year" ) )
+{
+    $end = mktime( 0,0,0, (int)eZHTTPTool::postVariable("end_month"), (int)eZHTTPTool::postVariable("end_day"), (int)eZHTTPTool::postVariable("end_year") );
+}
+if ( $start !== false and $end !== false )
+{
+    $conditions['created'] = array( false, array( $start, $end ) );
+}
+elseif ( $start !== false and $end === false )
+{
+    $conditions['created'] = array( '>', $start );
+}
+elseif ( $start === false and $end !== false )
+{
+    $conditions['created'] = array( '<', $end );
+}
+set_time_limit( 180 );
+$collections = eZPersistentObject::fetchObjectList( eZInformationCollection::definition(),
+                                                      null,
+                                                      $conditions,
+                                                      false,
+                                                      false );
+
 $counter=0;
 $attributes_to_export=array();
 while (true) {
