@@ -80,7 +80,7 @@
 <div class="context-toolbar">
 {include name=navigator
          uri='design:navigator/google.tpl'
-         page_uri='/infocollector/overview'
+         page_uri='/collectexport/overview'
          item_count=$object_count
          view_parameters=$view_parameters
          item_limit=$limit}
