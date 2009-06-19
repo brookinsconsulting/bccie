@@ -18,17 +18,6 @@
     </message>
 </context>
 <context>
-    <name>design/admin/infocollector/collectionlist</name>
-    <message>
-	<source>Information collected by <%object_name> [%collection_count]</source>
-	<translation>Zebrane informacje przez formularz <%object_name> [%collection_count]</translation>
-    </message>
-    <message>
-	<source>No information has been collected by this object.</source>
-	<translation>Brak informacji zebranych przez ten obiekt.</translation>
-    </message>
-</context>
-<context>
     <name>extension/collectexport</name>
     <message>
         <source>Collected information export</source>
