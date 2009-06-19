@@ -44,6 +44,9 @@ $tpl->setVariable( 'module', $module );
 $tpl->setVariable( 'object', $object );
 $tpl->setVariable( 'collection_array', $collections );
 $tpl->setVariable( 'collection_count', $numberOfCollections );
+$tpl->setVariable( 'end_day', date('d') );
+$tpl->setVariable( 'end_month', date('m') );
+$tpl->setVariable( 'end_year', date('Y') );
 
 $Result = array();
 $Result['content'] = $tpl->fetch( 'design:collectexport/export.tpl' );

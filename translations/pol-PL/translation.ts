@@ -75,7 +75,7 @@
         <translation>Wykonaj export</translation>
     </message>
     <message>
-        <source>Start date</source>
+        <source>Start Date</source>
         <translation>Początkowa data</translation>
     </message>
     <message>
