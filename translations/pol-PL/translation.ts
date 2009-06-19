@@ -11,11 +11,22 @@
     </message>
 </context>
 <context>
-	<name>design/admin/infocollector/collectionlist</name>
-	<message>
-		<source>Information collected by <%object_name> [%collection_count]</source>
-		<translation>Zebrane informacje przez formularz <%object_name> [%collection_count]</translation>
-	</message>
+    <name>design/admin/infocollector/overview</name>
+    <message>
+        <source>There are no objects that have collected any information.</source>
+	<translation>Nie ma żadnych obiektów, które posiadają jakiekolwiek zebrane informacje.</translation>
+    </message>
+</context>
+<context>
+    <name>design/admin/infocollector/collectionlist</name>
+    <message>
+	<source>Information collected by <%object_name> [%collection_count]</source>
+	<translation>Zebrane informacje przez formularz <%object_name> [%collection_count]</translation>
+    </message>
+    <message>
+	<source>No information has been collected by this object.</source>
+	<translation>Brak informacji zebranych przez ten obiekt.</translation>
+    </message>
 </context>
 <context>
     <name>extension/collectexport</name>
@@ -25,7 +36,7 @@
     </message>
 </context>
 <context>
-    <name>design/collectexport/export</name>
+    <name>design/collectexport/export</name>    
     <message>
         <source>Field #%counter</source>
         <translation>Pole #%counter</translation>
@@ -40,7 +51,7 @@
     </message>
     <message>
         <source>Ignore (note: field doesn't get created at all)</source>
-        <translation>Ignoruj kolumnę</translation>
+        <translation>Ignoruj kolumnę (uwaga: pole nie zostanie utworzone)</translation>
     </message>
     <message>
         <source>Export type</source>
@@ -73,6 +84,26 @@
     <message>
         <source>Do export</source>
         <translation>Wykonaj export</translation>
-    </message>    
+    </message>
+    <message>
+        <source>Start date</source>
+        <translation>Początkowa data</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation>Dzień</translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation>Miesiąc</translation>
+    </message>
+    <message>
+        <source>Year</source>
+        <translation>Rok</translation>
+    </message>
+    <message>
+        <source>End Date</source>
+        <translation>Końcowa data</translation>
+    </message>
 </context>
 </TS>

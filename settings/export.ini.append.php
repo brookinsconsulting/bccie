@@ -13,6 +13,7 @@ ExportableDatatypes[]=ezfloat
 ExportableDatatypes[]=ezidentifier
 ExportableDatatypes[]=ezenhancedobjectrelation
 ExportableDatatypes[]=ezselection
+ExportableDatatypes[]=ezoption
 # ExportableDatatypes[]=eztime
 # ExportableDatatypes[]=ezdate
 # ExportableDatatypes[]=ezdatetime
@@ -69,5 +70,9 @@ OutputRelatedObjectNames=true
 [ezselection]
 HandlerFile=ezselectionhandler.php
 HandlerClass=eZSelectionHandler
+
+[ezoption]
+HandlerFile=ezoptionhandler.php
+HandlerClass=eZOptionHandler
 
 */ ?>

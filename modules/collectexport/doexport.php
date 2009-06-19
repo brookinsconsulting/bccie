@@ -8,15 +8,15 @@ include_once ('lib/ezutils/classes/ezexecution.php');
 
 header("Content-type:text/csv; charset=utf-8");
 
-$http =& eZHTTPTool::instance();
-$module =& $Params['Module'];
+$http = eZHTTPTool::instance();
+$module = $Params['Module'];
 $objectID = $Params['ObjectID'];
 
 $object = false;
 
 if( is_numeric( $objectID ) )
 {
-    $object =& eZContentObject::fetch( $objectID );
+    $object = eZContentObject::fetch( $objectID );
 }
 
 if( !$object )
@@ -77,13 +77,13 @@ eZDebug::writeDebug($contentobject);
 
 switch($export_type){
     case 'csv':
-        $filename = $contentobject->attribute( 'name' ) ."_export_". $date_export .".csv";
+        $filename = "export_". $date_export .".csv";
         break;
     case 'sylk':
-        $filename = $contentobject->attribute( 'name' ) ."_export_". $date_export .".slk";
+        $filename = "export_". $date_export .".slk";
         break;
     default :
-        $filename = $contentobject->attribute( 'name' ) ."_export_". $date_export .".csv";
+        $filename = "export_". $date_export .".csv";
         break;
     }
 header("Content-Disposition: attachment; filename=$filename");

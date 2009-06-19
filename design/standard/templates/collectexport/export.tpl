@@ -78,7 +78,7 @@
         <fieldset>
         <legend>{'Field #%counter'|i18n('design/collectexport/export',, hash( '%counter', $counter) )}</legend>
             <select name="field_{$counter}">
-                <option selected "value="contentobjectid">{'Content object id'|i18n('design/collectexport/export')}</option>
+                <option selected="selected" value="contentobjectid">{'Content object id'|i18n('design/collectexport/export')}</option>
                 {section loop=$class.data_map}
                         {let current_inner_attribute=$:item}
                                 {section show=$current_inner_attribute.is_information_collector }
@@ -98,13 +98,13 @@
                                 <fieldset>
                                 <legend>{'Field #%counter'|i18n('design/collectexport/export',, hash( '%counter', $counter) )}</legend>
                                     <select name="field_{$counter}">
-                                        <option selected "value="contentobjectid">Content object id</option>
+                                        <option selected="selected" value="contentobjectid">Content object id</option>
                                 
                                         {section loop=$class.data_map}
                                                 {let current_inner_attribute=$:item}
                                                         {section show=$current_inner_attribute.is_information_collector }
                                                                 {section show=$current_inner_attribute.id|eq($current_attribute.id)}
-                                                                        <option selected value="{$current_inner_attribute.id}">{$current_inner_attribute.name} [{$current_inner_attribute.id}] </option>
+                                                                        <option selected="selected" value="{$current_inner_attribute.id}">{$current_inner_attribute.name} [{$current_inner_attribute.id}] </option>
                                                                 {section-else}
                                                                         <option value="{$current_inner_attribute.id}">{$current_inner_attribute.name} [{$current_inner_attribute.id}] </option>
                                                                 {/section}
@@ -131,11 +131,11 @@
 </fieldset>
 <fieldset>
 	<legend>{'Separation char for CSV export'|i18n('design/collectexport/export')}</legend>
-	<input type="radio" name="separation_char" checked="true" value=";"/> Semicolon (';') <br/>
-	<input type="radio" name="separation_char" value=","/> Comma (',') <br/>
-	<input type="radio" name="separation_char" value=":"/> Colon (':') <br/>
-	<input type="radio" name="separation_char" value="|"/> Pipe ('|') <br/>
-	<input type="radio" name="separation_char" value="#"/> Hash ('#') <br/>
+	<input type="radio" name="separation_char" checked="true" value=";"/> {'Semicolon'|i18n('design/collectexport/export')} (';') <br/>
+	<input type="radio" name="separation_char" value=","/> {'Comma'|i18n('design/collectexport/export')} (',') <br/>
+	<input type="radio" name="separation_char" value=":"/> {'Colon'|i18n('design/collectexport/export')} (':') <br/>
+	<input type="radio" name="separation_char" value="|"/> {'Pipe'|i18n('design/collectexport/export')} ('|') <br/>
+	<input type="radio" name="separation_char" value="#"/> {'Hash'|i18n('design/collectexport/export')} ('#') <br/>
 </fieldset>
 
 {section-else}
