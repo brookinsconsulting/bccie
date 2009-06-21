@@ -1,0 +1,2 @@
+[ExtensionSettings]
+DesignExtensions[]=collectexport
