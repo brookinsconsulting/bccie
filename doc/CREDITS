@@ -16,3 +16,5 @@ Inspired from the csv export module from Gabriel Ambuehl
 
 Support for the ezcountry datatype and csv header export from github.com/gerhardsletten
 
+Improved support for the ezselection datatype from Guillaume Kulakowski, projects.ez.no/cie/forum/general/bug_with_ezselection_and_cie_1_0_4
+
