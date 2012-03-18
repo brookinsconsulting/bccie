@@ -1,6 +1,8 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="pol-PL">
 <context>
-    <name>design/collectexport/overview</name>
+    <name>design/bccie/overview</name>
     <message>
         <source>Collected informations</source>
         <translation>Zebrane informacje</translation>
@@ -11,6 +13,28 @@
     </message>
 </context>
 <context>
+    <name>kernel/navigationpart</name>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BC CIE Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>design/admin/parts/bccie/menu</name>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extension project</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>design/admin/infocollector/overview</name>
     <message>
         <source>There are no objects that have collected any information.</source>
@@ -18,14 +42,14 @@
     </message>
 </context>
 <context>
-    <name>extension/collectexport</name>
+    <name>extension/bccie</name>
     <message>
         <source>Collected information export</source>
         <translation>Zebrane informacje export</translation>
     </message>
 </context>
 <context>
-    <name>design/collectexport/export</name>    
+    <name>design/bccie/export</name>    
     <message>
         <source>Field #%counter</source>
         <translation>Pole #%counter</translation>

@@ -1,7 +1,7 @@
 <?php /* #?ini charset="utf8"?
 
 [CronjobSettings]
-ExtensionDirectories[]=collectexport
+ExtensionDirectories[]=bccie
 
 [CronjobPart-exportcsv]
 Scripts[]

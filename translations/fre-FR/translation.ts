@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="fre-FR">
 <context>
     <name>design/collectexport/overview</name>
     <message>
@@ -8,6 +10,28 @@
     <message>
         <source>Export</source>
         <translation>Exporter</translation>
+    </message>
+</context>
+<context>
+    <name>kernel/navigationpart</name>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BC CIE Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>design/admin/parts/bccie/menu</name>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extension project</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 

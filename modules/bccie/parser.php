@@ -1,7 +1,15 @@
 <?php
+/**
+ * File containing the parser class.
+ *
+ * @copyright Copyright (C) 1999 - 2012 Brookins Consulting. All rights reserved.
+ * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2 (or any later version)
+ * @version //autogentag//
+ * @package bccie
+ */
 
 include_once('lib/ezutils/classes/ezini.php');
-include_once('extension/collectexport/modules/collectexport/basehandler.php');
+include_once('extension/bccie/modules/bccie/basehandler.php');
 include_once('kernel/classes/ezcontentobjecttreenode.php');
 
 class Parser {
@@ -13,7 +21,7 @@ var $exportableDatatypes;
 		$ini = eZINI::instance( "export.ini" );
 		$this->exportableDatatypes=$ini->variable( "General", "ExportableDatatypes" );
 		foreach ($this->exportableDatatypes as $typename) {
-			include_once("extension/collectexport/modules/collectexport/".$ini->variable($typename, 'HandlerFile'));
+			include_once("extension/bccie/modules/bccie/".$ini->variable($typename, 'HandlerFile'));
 			$classname = $ini->variable($typename, 'HandlerClass'); 
 			$handler = new $classname;
 			$this->handlerMap[$typename]=array("handler" => $handler, "exportable" => true);
@@ -23,7 +31,10 @@ var $exportableDatatypes;
 	function getExportableDatatypes() {
 		return $this->exportableDatatypes;
 	}
-	
+	function exportAttributeHeader(&$attribute, $seperationChar) {
+		$contentClassAttribute = $attribute->contentClassAttribute();
+		return $contentClassAttribute->Identifier;
+	}
 	function exportAttribute(&$attribute, $seperationChar)
 	{
 
@@ -45,12 +56,21 @@ var $exportableDatatypes;
 	    { 
             $ret = $handler->exportAttribute($attribute, $seperationChar);
 	    }
+
         if ( is_null( $ret ) )
 	       return false;
 	    else
 	       return $ret;	
 	}
-
+    function exportCollectionObjectHeaderNew(&$collection, &$attributes_to_export, $seperationChar) {
+		$resultstring = array();
+        array_push( $resultstring, "ID" );
+		$attributes2=$collection->informationCollectionAttributes();
+		foreach ($attributes2 as $currentattribute2) {
+			array_push($resultstring,$this->exportAttributeHeader($currentattribute2, $seperationChar));
+		}
+		return $resultstring;
+	}
 	function exportCollectionObject(&$collection, &$attributes_to_export, $seperationChar) {
 		$resultstring = array();
 		foreach ($attributes_to_export as $attributeid) {
@@ -62,7 +82,7 @@ var $exportableDatatypes;
 				$attributes=$collection->informationCollectionAttributes();
 				foreach ($attributes as $currentattribute)
 				{
-					if ( ((int) $attributeid)== ((int) $currentattribute->ContentClassAttributeID) )
+					if ( ( (int) $attributeid ) == ( (int) $currentattribute->ContentClassAttributeID ) )
 					{
 					    array_push($resultstring,$this->exportAttribute($currentattribute, $seperationChar));
 					}
@@ -103,6 +123,7 @@ var $exportableDatatypes;
             case "csv" :
 		        $returnstring = array();
 			// TODO: Refactor foreach into method
+			array_push( $returnstring, $this->exportCollectionObjectHeaderNew( $collections[0], $attributes_to_export, $seperationChar ) );
         		foreach ($collections as $collection) {
 			  if( $days != false )
 			  {
@@ -137,7 +158,7 @@ var $exportableDatatypes;
         		break;            
             case "sylk":
                 $returnstring = array();
-                array_push($returnstring, $this->exportCollectionObjectHeader($attributes_to_export));
+                // array_push($returnstring, $this->exportCollectionObjectHeader($attributes_to_export));
 			// TODO: Refactor foreach into method
         		foreach ($collections as $collection) {
 			  if( $days != false )

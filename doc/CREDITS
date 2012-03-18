@@ -1,0 +1,18 @@
+CREDITS
+=======
+
+Primary development by Brookins Consulting
+
+Extension originally written and created by Mathias VITALIS
+
+Released under the GNU General Public License v2 (or any later version)
+
+Project, http://projects.ez.no/cie
+
+GitHub, http://github.com/brookinsconsulting/bccie
+
+
+Inspired from the csv export module from Gabriel Ambuehl
+
+Support for the ezcountry datatype and csv header export from github.com/gerhardsletten
+

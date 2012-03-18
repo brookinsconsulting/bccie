@@ -1,40 +1,18 @@
 <?php
-//
-// Definition of CollectExport Export Methods
-//
-// CollectExport Export Methods
-//
-// Created on: <01-Mar-2007 00:06:00 Graham Brookins>
-// Last Updated: <19-Jul-2007 00:14:50 Graham Brookins>
-// Version: 1.0.2
-//
-// Copyright (C) 2001-2007 Brookins Consulting. All rights reserved.
-//
-// This source file is part of an extension for the eZ publish (tm)
-// Open Source Content Management System.
-//
-// This file may be distributed and/or modified under the terms of the
-// "GNU General Public License" version 2 (or greater) as published by
-// the Free Software Foundation and appearing in the file LICENSE
-// included in the packaging of this file.
-//
-// This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING
-// THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-// PURPOSE.
-//
-// The "GNU General Public License" (GPL) is available at
-// http://www.gnu.org/copyleft/gpl.html
-//
-// Contact licence@brookinsconsulting.com if any conditions
-// of this licencing isn't clear to you.
-//
+/**
+ * File containing the Export functions file.
+ *
+ * @copyright Copyright (C) 1999 - 2012 Brookins Consulting. All rights reserved.
+ * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2 (or any later version)
+ * @version //autogentag//
+ * @package bccie
+ */
 
 include_once( 'kernel/classes/ezcontentclass.php' );
 include_once( 'kernel/classes/ezinformationcollection.php' );
 include_once( 'lib/ezutils/classes/ezhttptool.php' );
 include_once( 'lib/ezutils/classes/ezexecution.php' );
 include_once( 'extension/collectexport/modules/collectexport/parser.php' );
-
 
 /*
   Export Collections

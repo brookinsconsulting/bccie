@@ -1,4 +1,4 @@
-<form name="objects" method="post" action={'/collectexport/overview/'|ezurl}>
+<form name="objects" method="post" action={'/bccie/overview/'|ezurl}>
 
 {let number_of_items=min( ezpreference( 'admin_infocollector_list_limit' ), 3)|choose( 10, 10, 25, 50 )}
 
@@ -55,7 +55,7 @@
     <th>{'First collection'|i18n( 'design/admin/infocollector/overview' )}</th>
     <th>{'Last collection'|i18n( 'design/admin/infocollector/overview' )}</th>
     <th class="tight">{'Collections'|i18n( 'design/admin/infocollector/overview' )}</th>
-    <th>{'Export'|i18n( 'design/collectexport/overview' )}</th>
+    <th>{'Export'|i18n( 'design/bccie/overview' )}</th>
 </tr>
 {section var=Objects loop=$object_array sequence=array( bglight, bgdark )}
 <tr class="{$Objects.sequence}">
@@ -65,7 +65,7 @@
     <td>{$Objects.item.first_collection|l10n( shortdatetime )}</td>
     <td>{$Objects.item.last_collection|l10n( shortdatetime )}</td>
     <td class="number" align="right"><a href={concat( '/infocollector/collectionlist/', $Objects.item.contentobject_id )|ezurl}>{$Objects.item.collections}</a></td>
-    <td align="right"><a href={concat( '/collectexport/export/', $Objects.item.contentobject_id )|ezurl}>{'Export'|i18n( 'design/collectexport/overview' )}</a></td>
+    <td align="right"><a href={concat( '/bccie/export/', $Objects.item.contentobject_id )|ezurl}>{'Export'|i18n( 'design/bccie/overview' )}</a></td>
 </tr>
 {/section}
 </table>
@@ -80,7 +80,7 @@
 <div class="context-toolbar">
 {include name=navigator
          uri='design:navigator/google.tpl'
-         page_uri='/collectexport/overview'
+         page_uri='/bccie/overview'
          item_count=$object_count
          view_parameters=$view_parameters
          item_limit=$limit}

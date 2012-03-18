@@ -1,6 +1,8 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="ger-DE">
 <context>
-    <name>design/collectexport/overview</name>
+    <name>design/bccie/overview</name>
     <message>
         <source>Collected informations</source>
         <translation>Gesammelte Informationen</translation>
@@ -10,16 +12,38 @@
         <translation>Exportieren</translation>
     </message>
 </context>
+<context>
+    <name>kernel/navigationpart</name>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BC CIE Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>design/admin/parts/bccie/menu</name>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extension project</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 
 <context>
-    <name>extension/collectexport</name>
+    <name>extension/bccie</name>
     <message>
         <source>Collected information export</source>
         <translation>Export gesammelter Informationen</translation>
     </message>
 </context>
 <context>
-    <name>design/collectexport/export</name>
+    <name>design/bccie/export</name>
     <message>
         <source>Field #%counter</source>
         <translation>Feld Nr. %counter</translation>

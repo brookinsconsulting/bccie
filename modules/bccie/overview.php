@@ -1,8 +1,17 @@
 <?php
+/**
+ * File containing the overview module view.
+ *
+ * @copyright Copyright (C) 1999 - 2012 Brookins Consulting. All rights reserved.
+ * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2 (or any later version)
+ * @version //autogentag//
+ * @package bccie
+ */
 
 include_once( 'kernel/common/template.php' );
 include_once( 'kernel/classes/ezpreferences.php' );
 include_once( 'kernel/classes/ezinformationcollection.php' );
+include_once( 'kernel/common/i18n.php' );
 
 $http = eZHTTPTool::instance();
 $module = $Params['Module'];
@@ -26,7 +35,7 @@ if( $module->isCurrentAction( 'RemoveObjectCollection' ) && $http->hasPostVariab
         $collections += eZInformationCollection::fetchCollectionCountForObject( $objectID );
     }
 
-    $tpl =& templateInit();
+    $tpl = eZTemplate::factory();
     $tpl->setVariable( 'module', $module );
     $tpl->setVariable( 'collections', $collections );
     $tpl->setVariable( 'remove_type', 'objects' );
@@ -34,7 +43,7 @@ if( $module->isCurrentAction( 'RemoveObjectCollection' ) && $http->hasPostVariab
     $Result = array();
     $Result['content'] = $tpl->fetch( 'design:infocollector/confirmremoval.tpl' );
     $Result['path'] = array( array( 'url' => false,
-                                    'text' => ezi18n( 'kernel/infocollector', 'Collected information' ) ) );
+                                    'text' => ezpI18n::tr( 'kernel/infocollector', 'Collected information' ) ) );
     return;
 }
 
@@ -94,7 +103,7 @@ $infoCollectorObjectsQuery = $db->arrayQuery( 'SELECT COUNT( DISTINCT ezinfocoll
                                                     AND ezinfocollection.contentobject_id=ezcontentobject_tree.contentobject_id' );
 $numberOfInfoCollectorObjects = 0;
 
-if ( $infoCollectorObjectsQuery )
+if( $infoCollectorObjectsQuery )
 {
     $numberOfInfoCollectorObjects = $infoCollectorObjectsQuery[0]['count'];
 }
@@ -131,7 +140,7 @@ foreach ( array_keys( $objects ) as $i )
 
 $viewParameters = array( 'offset' => $offset );
 
-$tpl = templateInit();
+$tpl = eZTemplate::factory();
 $tpl->setVariable( 'module', $module );
 $tpl->setVariable( 'limit', $limit );
 $tpl->setVariable( 'view_parameters', $viewParameters );
@@ -139,9 +148,10 @@ $tpl->setVariable( 'object_array', $objects );
 $tpl->setVariable( 'object_count', $numberOfInfoCollectorObjects );
 
 $Result = array();
-$Result['content'] = $tpl->fetch( 'design:collectexport/overview.tpl' );
-$Result['left_menu'] = 'design:collectexport/export_menu.tpl';
+$Result['content'] = $tpl->fetch( 'design:bccie/overview.tpl' );
+$Result['navigation_part'] = 'ezbccienavigationpart';
+$Result['left_menu'] = 'design:bccie/export_menu.tpl';
 $Result['path'] = array( array( 'url' => false,
-                                'text' => ezi18n( 'extension/collectexport', 'Collected information export' ) ) );
+                                'text' => ezpI18n::tr( 'extension/bccie', 'Collected information export' ) ) );
 
 ?>

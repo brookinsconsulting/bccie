@@ -1,10 +1,15 @@
+<?php /* #?ini charset="utf-8"?
+
 [TemplateSettings]
-ExtensionAutoloadPath[]=collectexport
+# ExtensionAutoloadPath[]=bccie
 
 [RegionalSettings]
-TranslationExtensions[]=collectexport
+TranslationExtensions[]=bccie
 
 [RoleSettings]
-PolicyOmitList[]=collectexport/overview
-PolicyOmitList[]=collectexport/export
-PolicyOmitList[]=collectexport/doexport
+PolicyOmitList[]=bccie/overview
+PolicyOmitList[]=bccie/export
+PolicyOmitList[]=bccie/doexport
+
+
+*/ ?>
