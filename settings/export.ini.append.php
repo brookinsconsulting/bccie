@@ -22,7 +22,7 @@ ExportableDatatypes[]=ezcountry
 
 
 # All handlerfiles are sought in the base directory,
-# extension/collectexport/modules/collectexport/,
+# extension/bccie/modules/bccie/,
 # if you want to place them some place down the path
 # from there, add the path from there.
 

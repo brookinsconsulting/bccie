@@ -12,7 +12,7 @@ include_once( 'kernel/classes/ezcontentclass.php' );
 include_once( 'kernel/classes/ezinformationcollection.php' );
 include_once( 'lib/ezutils/classes/ezhttptool.php' );
 include_once( 'lib/ezutils/classes/ezexecution.php' );
-include_once( 'extension/collectexport/modules/collectexport/parser.php' );
+include_once( 'extension/bccie/modules/bccie/parser.php' );
 
 /*
   Export Collections

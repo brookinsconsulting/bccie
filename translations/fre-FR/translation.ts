@@ -2,7 +2,7 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="fre-FR">
 <context>
-    <name>design/collectexport/overview</name>
+    <name>design/bccie/overview</name>
     <message>
         <source>Collected informations</source>
         <translation>Informations collectées</translation>
@@ -36,14 +36,14 @@
 </context>
 
 <context>
-    <name>extension/collectexport</name>
+    <name>extension/bccie</name>
     <message>
         <source>Collected information export</source>
         <translation>Export des informations collectées</translation>
     </message>
 </context>
 <context>
-    <name>design/collectexport/export</name>
+    <name>design/bccie/export</name>
     <message>
         <source>Field #%counter</source>
         <translation>Champ N°%counter</translation>

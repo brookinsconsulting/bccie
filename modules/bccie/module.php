@@ -27,7 +27,7 @@ $ViewList = array();
 $ViewList['overview'] = array(
     'script' => 'overview.php',
     'functions' => array( 'read' ),
-    'default_navigation_part' => 'collectexport',
+    'default_navigation_part' => 'bccie',
     'ui_context' => 'view', // 'ui_context' => 'administration',
     'unordered_params' => array( 'offset' => 'Offset' ),
     'single_post_actions' => array( 'RemoveObjectCollectionButton' => 'RemoveObjectCollection',
