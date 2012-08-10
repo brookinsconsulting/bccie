@@ -27,5 +27,3 @@ Features for consideration:
 
 - Add: Detection of corrupted items and possibly fail when class attributes don't match (per record, per first and last record), possibly depending on above setting)
 
-- Rename: Extension name and related cases of 'collectexport' to 'cie'
-
