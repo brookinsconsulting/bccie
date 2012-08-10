@@ -10,7 +10,7 @@
 
 
 include_once( 'lib/ezutils/classes/ezini.php' );
-include_once( 'extension/collectexport/classes/export.php' );
+include_once( 'extension/bccie/classes/export.php' );
 
 
 // Settings
