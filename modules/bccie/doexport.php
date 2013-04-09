@@ -64,6 +64,12 @@ $collections = eZPersistentObject::fetchObjectList( eZInformationCollection::def
                                                       false,
                                                       false );
 
+//TODO: change error handler
+if( !$collections )
+{
+    return $module->handleError( EZ_ERROR_KERNEL_NOT_AVAILABLE, 'kernel' );
+}
+
 $counter=0;
 $attributes_to_export=array();
 
