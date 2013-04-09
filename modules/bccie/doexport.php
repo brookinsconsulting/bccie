@@ -43,7 +43,7 @@ if( $http->hasPostVariable( "start_year" ) )
 }
 if( $http->hasPostVariable( "end_year" ) )
 {
-    $end = mktime( 0,0,0, (int)$http->postVariable("end_month"), (int)$http->postVariable("end_day"), (int)$http->postVariable("end_year") );
+    $end = mktime( 23,59,59, (int)$http->postVariable("end_month"), (int)$http->postVariable("end_day"), (int)$http->postVariable("end_year") );
 }
 if( $start !== false and $end !== false )
 {
