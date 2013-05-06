@@ -105,7 +105,7 @@ switch($export_type){
 
 header("Content-Disposition: attachment; filename=$filename");
 
-$export_string=$parser->exportInformationCollection( $collections, $attributes_to_export, $seperation_char, $export_type, $objectID);
+$export_string=$parser->exportInformationCollection( $collections, $attributes_to_export, $seperation_char, $export_type );
 
 echo($export_string);
 
