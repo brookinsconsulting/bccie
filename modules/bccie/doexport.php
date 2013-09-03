@@ -84,12 +84,9 @@ while( true ) {
 
 $seperation_char = $http->postVariable("separation_char");
 $export_type = $http->postVariable("export_type");
-$parser = new Parser();
+$parser = new Parser($objectID);
 
 $date_export = date("d-m-Y");
-$contentobject = eZContentObject::fetch($objectID);
-
-eZDebug::writeDebug($contentobject);
 
 switch($export_type){
     case 'csv':
@@ -106,10 +103,11 @@ switch($export_type){
 header("Content-Disposition: attachment; filename=$filename");
 
 $export_string=$parser->exportInformationCollection( $collections, $attributes_to_export, $seperation_char, $export_type );
-
+ 
 echo($export_string);
 
 flush();
+
 eZExecution::cleanExit();
 
 ?>

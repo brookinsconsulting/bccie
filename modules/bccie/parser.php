@@ -14,10 +14,11 @@ include_once('kernel/classes/ezcontentobjecttreenode.php');
 
 class Parser {
 
-var $handlerMap=array();
-var $exportableDatatypes;
+	var $handlerMap=array();
+	var $exportableDatatypes;
+	var $contentClassCollectorAttributes;
 
-	function Parser() {
+	function Parser($objectID = false ){
 		$ini = eZINI::instance( "export.ini" );
 		$this->exportableDatatypes=$ini->variable( "General", "ExportableDatatypes" );
 		foreach ($this->exportableDatatypes as $typename) {
@@ -26,15 +27,23 @@ var $exportableDatatypes;
 			$handler = new $classname;
 			$this->handlerMap[$typename]=array("handler" => $handler, "exportable" => true);
 		}
+
+		/*
+		if ($objectID){
+			$this->getContentClassCollectorAttributes($objectID);
+		}
+		*/
+		
 	}
 	
 	function getExportableDatatypes() {
 		return $this->exportableDatatypes;
 	}
+
 	function exportAttributeHeader(&$attribute, $seperationChar) {
-		$contentClassAttribute = $attribute->contentClassAttribute();
-		return $contentClassAttribute->Identifier;
+		return $attribute->attribute('name');
 	}
+
 	function exportAttribute(&$attribute, $seperationChar)
 	{
 
@@ -62,17 +71,40 @@ var $exportableDatatypes;
 	    else
 	       return $ret;	
 	}
+
+	/*
+	 * Returns all collection attributes from the ContentClass of contentObject $objectID
+	 * @param $objectID int
+	 * @return set $this->contentClassCollectorAttributes
+	 */
+	function getContentClassCollectorAttributes($objectID) {
+		$formObject = eZContentObject::fetch($objectID);
+		$formObjectClass = $formObject->contentClass();
+        $contentClassAttributes = $formObjectClass->fetchAttributes();
+        $this->contentClassCollectorAttributes = array();
+
+        foreach ($contentClassAttributes as $contentClassAttribute) {
+        	if ($contentClassAttribute->attribute('is_information_collector')) {
+				array_push($this->contentClassCollectorAttributes , $contentClassAttribute->attribute('id'));
+			}
+        }
+	}
+
     function exportCollectionObjectHeaderNew(&$collection, &$attributes_to_export, $seperationChar) {
 		$resultstring = array();
-        array_push( $resultstring, "ID" );
-		$attributes2=$collection->informationCollectionAttributes();
-		foreach ($attributes2 as $currentattribute2) {
-			array_push($resultstring,$this->exportAttributeHeader($currentattribute2, $seperationChar));
+		array_push( $resultstring, "ID" );
+
+		foreach ($attributes_to_export as $classAttributeID) {
+			if(is_numeric($classAttributeID)){
+				array_push($resultstring,$this->exportAttributeHeader(eZContentClassAttribute::fetch($classAttributeID), $seperationChar));
+			}
 		}
 		return $resultstring;
 	}
+
 	function exportCollectionObject(&$collection, &$attributes_to_export, $seperationChar) {
 		$resultstring = array();
+
 		foreach ($attributes_to_export as $attributeid) {
 			if ($attributeid == "contentobjectid") {
 				array_push($resultstring,$collection->ID);
@@ -80,12 +112,21 @@ var $exportableDatatypes;
 			    array_push($resultstring,"");
 			} else if ($attributeid != -2) {
 				$attributes=$collection->informationCollectionAttributes();
+				$exportedAttribute = false;
+
 				foreach ($attributes as $currentattribute)
 				{
 					if ( ( (int) $attributeid ) == ( (int) $currentattribute->ContentClassAttributeID ) )
 					{
-					    array_push($resultstring,$this->exportAttribute($currentattribute, $seperationChar));
+					    $exportedAttribute = $this->exportAttribute($currentattribute, $seperationChar);
 					}
+				}
+
+				if ($exportedAttribute) {
+					array_push($resultstring , utf8_encode($exportedAttribute));
+				}
+				else {
+					array_push($resultstring , "NC");
 				}
 			}
 		}
@@ -113,7 +154,6 @@ var $exportableDatatypes;
 		}
 		return $resultstring;
 	}
-
 
 	function exportInformationCollection( $collections, $attributes_to_export, $seperationChar, $export_type='csv', $days ) {
 
