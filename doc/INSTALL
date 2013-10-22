@@ -17,7 +17,7 @@ Introduction
 1. Copyright
    ---------
 
-   BC CIE is copyright 1999 - 2013 Brookins Consulting and Mathias VITALIS
+   BC CIE is copyright 1999 - 2014 Brookins Consulting and Mathias VITALIS
 
    See: doc/COPYRIGHT for more information on the terms of the copyright and license
 
@@ -25,30 +25,30 @@ Introduction
      -------
 
      BC CIE is licensed under the GNU General Public License.
-    
+
      The complete license agreement is included in the doc/LICENSE file.
-    
+
      BC CIE is free software: you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
      the Free Software Foundation, either version 2 of the License, or
      (at your option) any later version.
-    
+
      BC CIE is distributed in the hope that it will be useful,
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
      GNU General Public License for more details.
-    
+
      The GNU GPL gives you the right to use, modify and redistribute
      BC CIE under certain conditions. The GNU GPL license
      is distributed with the software, see the file doc/LICENSE.
-    
+
      It is also available at http://www.gnu.org/licenses/gpl.txt
-    
+
      You should have received a copy of the GNU General Public License
      along with BC CIE in doc/LICENSE.  If not, see http://www.gnu.org/licenses/.
-    
+
      Using BC CIE under the terms of the GNU GPL is free (as in freedom).
-    
+
      For more information or questions please contact
      license@brookinsconsulting.com
 
@@ -102,10 +102,10 @@ Installing BC CIE extension
    necessary is depends on the file you downloaded.
 
    [tar.gz]
-   tar -zxvf bccie-1_0_5.tar.gz
+   tar -zxvf bccie-1_0_7.tar.gz
 
    [zip]
-   unzip bccie-1_0_5.tar.zip
+   unzip bccie-1_0_7.tar.zip
 
 
 3. (Optional) Git clone the latest GitHub brookinsconsulting bccie extension sources into the extension directory
@@ -143,7 +143,7 @@ wget https://github.com/brookinsconsulting/bccie/zipball/master
 
 tar -zxf brookinsconsulting-bccie-d1d1411.tar.gz;
 
-or 
+or
 
 unzip brookinsconsulting-bccie-d1d1411.tar.gz;
 
