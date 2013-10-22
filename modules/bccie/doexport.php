@@ -2,7 +2,7 @@
 /**
  * File containing the doexport module view.
  *
- * @copyright Copyright (C) 1999 - 2012 Brookins Consulting. All rights reserved.
+ * @copyright Copyright (C) 1999 - 2014 Brookins Consulting. All rights reserved.
  * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2 (or any later version)
  * @version //autogentag//
  * @package bccie
@@ -19,7 +19,6 @@ header("Content-type:text/csv; charset=utf-8");
 $http = eZHTTPTool::instance();
 $module = $Params['Module'];
 $objectID = $Params['ObjectID'];
-
 $object = false;
 
 if( is_numeric( $objectID ) )
@@ -36,6 +35,7 @@ $conditions = array( 'contentobject_id' => $objectID  );
 
 $start = false;
 $end = false;
+$days = false;
 
 if( $http->hasPostVariable( "start_year" ) )
 {
@@ -44,6 +44,10 @@ if( $http->hasPostVariable( "start_year" ) )
 if( $http->hasPostVariable( "end_year" ) )
 {
     $end = mktime( 23,59,59, (int)$http->postVariable("end_month"), (int)$http->postVariable("end_day"), (int)$http->postVariable("end_year") );
+}
+if( $start !== false and $end !== false )
+{
+    $days = round( abs( $start - $end )/86400 );
 }
 if( $start !== false and $end !== false )
 {
@@ -59,10 +63,10 @@ elseif( $start === false and $end !== false )
 }
 set_time_limit( 180 );
 $collections = eZPersistentObject::fetchObjectList( eZInformationCollection::definition(),
-                                                      null,
-                                                      $conditions,
-                                                      false,
-                                                      false );
+                                                    null,
+                                                    $conditions,
+                                                    false,
+                                                    false );
 
 //TODO: change error handler
 if( !$collections )
@@ -73,13 +77,15 @@ if( !$collections )
 $counter=0;
 $attributes_to_export=array();
 
-while( true ) {
-	$currentattribute=$http->postVariable("field_$counter");
-	if(!$currentattribute) {
-		break;
-	}
-	$attributes_to_export[]=$currentattribute;
-	$counter++;
+while( true )
+{
+    $currentattribute=$http->postVariable("field_$counter");
+    if(!$currentattribute)
+    {
+        break;
+    }
+    $attributes_to_export[]=$currentattribute;
+    $counter++;
 }
 
 $seperation_char = $http->postVariable("separation_char");
@@ -87,11 +93,12 @@ $export_type = $http->postVariable("export_type");
 $parser = new Parser();
 
 $date_export = date("d-m-Y");
-$contentobject = eZContentObject::fetch($objectID);
+$contentobject = eZContentObject::fetch( $objectID );
 
 eZDebug::writeDebug($contentobject);
 
-switch($export_type){
+switch($export_type)
+{
     case 'csv':
         $filename = "export_". $date_export .".csv";
         break;
@@ -101,13 +108,13 @@ switch($export_type){
     default :
         $filename = "export_". $date_export .".csv";
         break;
-    }
+}
 
 header("Content-Disposition: attachment; filename=$filename");
 
-$export_string=$parser->exportInformationCollection( $collections, $attributes_to_export, $seperation_char, $export_type );
+$export_string=$parser->exportInformationCollection( $collections, $attributes_to_export, $seperation_char, $export_type, $days );
 
-echo($export_string);
+echo( $export_string );
 
 flush();
 eZExecution::cleanExit();

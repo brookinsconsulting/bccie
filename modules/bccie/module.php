@@ -2,7 +2,7 @@
 /**
  * File containing the bccie module definition.
  *
- * @copyright Copyright (C) 1999 - 2012 Brookins Consulting. All rights reserved.
+ * @copyright Copyright (C) 1999 - 2014 Brookins Consulting. All rights reserved.
  * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2 (or any later version)
  * @version //autogentag//
  * @package bccie
@@ -12,7 +12,7 @@
 // Author : Mathias VITALIS
 // www.silverhand.fr
 //
-// This module allows for easy export collected informations 
+// This module allows for easy export collected informations
 // from contentobjects to csv or sylk files
 //
 // Inspired from the csv export module from Gabriel Ambuehl.

@@ -1,6 +1,6 @@
 <?php /* #?ini charset="utf-8"?
 
-[TemplateSettings]
+# [TemplateSettings]
 # ExtensionAutoloadPath[]=bccie
 
 [RegionalSettings]
@@ -10,6 +10,5 @@ TranslationExtensions[]=bccie
 PolicyOmitList[]=bccie/overview
 PolicyOmitList[]=bccie/export
 PolicyOmitList[]=bccie/doexport
-
 
 */ ?>

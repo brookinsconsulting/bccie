@@ -2,7 +2,7 @@
 /**
  * File containing the Export functions file.
  *
- * @copyright Copyright (C) 1999 - 2012 Brookins Consulting. All rights reserved.
+ * @copyright Copyright (C) 1999 - 2014 Brookins Consulting. All rights reserved.
  * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2 (or any later version)
  * @version //autogentag//
  * @package bccie
@@ -106,10 +106,10 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
   $collection_count = eZInformationCollection::fetchCollectionCountForObject( $objectID );
 
   if ( $debug == true )
-  {  
+  {
      echo "Object Collection Count: $collection_count\n\n";
      echo "Object Collection Contents: \n";
-     print_r( $collections ); 
+     print_r( $collections );
   }
 
   $attributes_to_export = array();
@@ -119,7 +119,7 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
   {
     // print_r( $attribute );
     if( is_object( $attribute ) )
-    { 
+    {
       $is_ic = $attribute->attribute('is_information_collector');
       if( is_numeric( $is_ic ) )
       {
@@ -127,7 +127,7 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
         {
          $id = $attribute->attribute('id');
          $name = $attribute->attribute('identifier');
-         
+
          $attributes_to_export[]=$id;
 
          if( $debug )
@@ -183,7 +183,7 @@ function exportCollection( $objectID=false, $dir='var/export', $format='csv', $s
   print_r("Object information collection record entries fetch in progress...\n");
 
   $parser = new Parser();
-  $data = $parser->exportInformationCollection( $collections, 
+  $data = $parser->exportInformationCollection( $collections,
           $attributes_to_export, $separator,
           $format, $days );
 
