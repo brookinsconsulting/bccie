@@ -15,10 +15,9 @@ ExportableDatatypes[]=ezenhancedobjectrelation
 ExportableDatatypes[]=ezselection
 ExportableDatatypes[]=ezoption
 ExportableDatatypes[]=ezcountry
-
-# ExportableDatatypes[]=eztime
-# ExportableDatatypes[]=ezdate
-# ExportableDatatypes[]=ezdatetime
+ExportableDatatypes[]=eztime
+ExportableDatatypes[]=ezdate
+ExportableDatatypes[]=ezdatetime
 
 
 # All handlerfiles are sought in the base directory,
@@ -80,5 +79,17 @@ HandlerClass=eZOptionHandler
 [ezcountry]
 HandlerFile=ezcountrtyhandler.php
 HandlerClass=eZCountryHandler
+
+[ezdatetime]
+HandlerFile=ezdatetimehandler.php
+HandlerClass=eZDateTimeHandler
+
+[eztime]
+HandlerFile=eztimehandler.php
+HandlerClass=eZTimeHandler
+
+[ezdate]
+HandlerFile=ezdatehandler.php
+HandlerClass=eZDateHandler
 
 */ ?>
