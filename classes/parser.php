@@ -495,7 +495,7 @@ class Parser
                 {
                     if( isset( $tableau[$i][$cpt] ) )
                     {
-                      $line .= '"'.trim( $tableau[$i][$cpt] ) .'"'. $seperator;
+                      $line .= '"' . trim( $tableau[ $i ][ $cpt ] ) . '"' . $seperator;
                     }
                 }
                 $line .= "\n";
