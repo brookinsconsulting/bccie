@@ -7,7 +7,7 @@
  * @version //autogentag//
  * @package bccie
  */
-include_once('extension/bccie/modules/bccie/basehandler.php');
+include_once('extension/bccie/classes/basehandler.php');
 
 class eZCountryHandler extends BaseHandler {
     function exportAttribute(&$attribute, $seperationChar) {

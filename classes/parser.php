@@ -8,9 +8,9 @@
  * @package bccie
  */
 
-include_once('lib/ezutils/classes/ezini.php');
-include_once('extension/bccie/modules/bccie/basehandler.php');
-include_once('kernel/classes/ezcontentobjecttreenode.php');
+include_once( 'lib/ezutils/classes/ezini.php' );
+include_once( 'extension/bccie/classes/basehandler.php' );
+include_once( 'kernel/classes/ezcontentobjecttreenode.php' );
 
 class Parser
 {
@@ -23,13 +23,15 @@ class Parser
     {
         $ini = eZINI::instance( "export.ini" );
         $this->exportableDatatypes = $ini->variable( "General", "ExportableDatatypes" );
-        foreach ( $this->exportableDatatypes as $typename ) {
-            include_once( "extension/bccie/modules/bccie/" . $ini->variable( $typename, 'HandlerFile' ) );
+
+        foreach ( $this->exportableDatatypes as $typename )
+        {
+            include_once( "extension/bccie/classes/" . $ini->variable( $typename, 'HandlerFile' ) );
+
             $classname = $ini->variable( $typename, 'HandlerClass' );
             $handler = new $classname;
             $this->handlerMap[ $typename ] = array( "handler" => $handler, "exportable" => true );
         }
-
 
         /*
             if ($objectID)
@@ -160,7 +162,7 @@ class Parser
                 }
                 else
                 {
-                    array_push( $resultstring, "NC" );
+                    array_push( $resultstring, "" );
                 }
             }
         }

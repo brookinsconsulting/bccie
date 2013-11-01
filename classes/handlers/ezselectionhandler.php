@@ -7,7 +7,7 @@
  * @version //autogentag//
  * @package bccie
  */
-include_once('extension/bccie/modules/bccie/parser.php');
+include_once('extension/bccie/classes/parser.php');
 
 class eZSelectionHandler extends BaseHandler
 {
