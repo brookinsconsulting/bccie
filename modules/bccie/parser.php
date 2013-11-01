@@ -15,34 +15,50 @@ include_once('kernel/classes/ezcontentobjecttreenode.php');
 class Parser
 {
 
-var $handlerMap=array();
-var $exportableDatatypes;
+    var $handlerMap = array();
+    var $exportableDatatypes;
+    var $contentClassCollectorAttributes;
 
-    function Parser()
+    function Parser( $objectID = false )
     {
         $ini = eZINI::instance( "export.ini" );
-        $this->exportableDatatypes=$ini->variable( "General", "ExportableDatatypes" );
+        $this->exportableDatatypes = $ini->variable( "General", "ExportableDatatypes" );
         foreach ( $this->exportableDatatypes as $typename ) {
-            include_once( "extension/bccie/modules/bccie/".$ini->variable( $typename, 'HandlerFile' ) );
+            include_once( "extension/bccie/modules/bccie/" . $ini->variable( $typename, 'HandlerFile' ) );
             $classname = $ini->variable( $typename, 'HandlerClass' );
             $handler = new $classname;
-            $this->handlerMap[ $typename ]=array( "handler" => $handler, "exportable" => true );
+            $this->handlerMap[ $typename ] = array( "handler" => $handler, "exportable" => true );
         }
+
+
+        /*
+            if ($objectID)
+            {
+                $this->getContentClassCollectorAttributes($objectID);
+            }
+        */
     }
 
     function getExportableDatatypes()
     {
         return $this->exportableDatatypes;
     }
+
     function exportAttributeHeader( &$attribute, $seperationChar )
     {
-        $contentClassAttribute = $attribute->contentClassAttribute();
-        return $contentClassAttribute->Identifier;
+        /* Older alternate */
+        /*
+            $contentClassAttribute = $attribute->contentClassAttribute();
+            return $contentClassAttribute->Identifier;
+        */
+
+        return $attribute->attribute('name');
     }
+
     function exportAttribute( &$attribute, $seperationChar )
     {
         $ret = false;
-        $handler=$this->handlerMap[ eZContentClassAttribute::dataTypeByID( $attribute->ContentClassAttributeID ) ]['handler'];
+        $handler = $this->handlerMap[ eZContentClassAttribute::dataTypeByID( $attribute->ContentClassAttributeID ) ][ 'handler' ];
 
         /*
         BC: Error Debug Comment Test Case Output
@@ -66,32 +82,85 @@ var $exportableDatatypes;
         else
            return $ret;
     }
+
+    /*
+     * Returns all collection attributes from the ContentClass of contentObject $objectID
+     * @param $objectID int
+     * @return set $this->contentClassCollectorAttributes
+     */
+    function getContentClassCollectorAttributes( $objectID )
+    {
+        $formObject = eZContentObject::fetch( $objectID );
+        $formObjectClass = $formObject->contentClass();
+        $contentClassAttributes = $formObjectClass->fetchAttributes();
+        $this->contentClassCollectorAttributes = array();
+
+        foreach ( $contentClassAttributes as $contentClassAttribute )
+        {
+            if ( $contentClassAttribute->attribute('is_information_collector') )
+            {
+                array_push( $this->contentClassCollectorAttributes , $contentClassAttribute->attribute('id') );
+            }
+        }
+    }
+
     function exportCollectionObjectHeaderNew( &$collection, &$attributes_to_export, $seperationChar )
     {
         $resultstring = array();
         array_push( $resultstring, "ID" );
+
+        /* Older alternate */
+        /*
         $attributes2=$collection->informationCollectionAttributes();
         foreach ( $attributes2 as $currentattribute2 ) {
             array_push( $resultstring,$this->exportAttributeHeader( $currentattribute2, $seperationChar ) );
         }
+        */
+
+        foreach ( $attributes_to_export as $classAttributeID )
+        {
+            if( is_numeric( $classAttributeID ) )
+            {
+                array_push( $resultstring, $this->exportAttributeHeader( eZContentClassAttribute::fetch( $classAttributeID ), $seperationChar ) );
+            }
+        }
         return $resultstring;
     }
+
     function exportCollectionObject( &$collection, &$attributes_to_export, $seperationChar )
     {
         $resultstring = array();
-        foreach ($attributes_to_export as $attributeid) {
-            if ( $attributeid == "contentobjectid" ) {
+        foreach ( $attributes_to_export as $attributeid )
+        {
+            if ( $attributeid == "contentobjectid" )
+            {
                 array_push( $resultstring,$collection->ID );
-            } else if ( $attributeid == -1 ) {
+            }
+            else if ( $attributeid == -1 )
+            {
                 array_push( $resultstring,"" );
-            } else if ( $attributeid != -2 ) {
+            }
+            else if ( $attributeid != -2 )
+            {
                 $attributes=$collection->informationCollectionAttributes();
+                $exportedAttribute = false;
+
                 foreach ( $attributes as $currentattribute )
                 {
                     if ( ( (int) $attributeid ) == ( (int) $currentattribute->ContentClassAttributeID ) )
                     {
-                        array_push( $resultstring,$this->exportAttribute( $currentattribute, $seperationChar ) );
+                        /* array_push( $resultstring, $this->exportAttribute( $currentattribute, $seperationChar ) ); */
+                        $exportedAttribute = $this->exportAttribute( $currentattribute, $seperationChar );
                     }
+                }
+
+                if ( $exportedAttribute )
+                {
+                    array_push( $resultstring, utf8_encode( $exportedAttribute ) );
+                }
+                else
+                {
+                    array_push( $resultstring, "NC" );
                 }
             }
         }
@@ -103,41 +172,47 @@ var $exportableDatatypes;
         $resultstring = array();
         foreach( $attributes_to_export as $attributeid )
         {
-            if ( $attributeid == "contentobjectid" ) {
+            if ( $attributeid == "contentobjectid" )
+            {
                 array_push( $resultstring, "ID" );
-            } else if ( $attributeid == -1 ) {
+            }
+            else if ( $attributeid == -1 )
+            {
                 array_push( $resultstring, "" );
-            } else if ( $attributeid != -2 ) {
+            }
+            else if ( $attributeid != -2 )
+            {
                 $attribute = & eZContentClassAttribute::fetch( $attributeid );
-                            $attribute_name = $attribute->name();
-                            $attribute_name_escaped = preg_replace( "(\r\n|\n|\r)", " ", $attribute_name );
-                            $attribute_name_escaped = utf8_decode( $attribute_name_escaped );
-                            array_push( $resultstring, $attribute_name_escaped );
+                $attribute_name = $attribute->name();
+                $attribute_name_escaped = preg_replace( "(\r\n|\n|\r)", " ", $attribute_name );
+                $attribute_name_escaped = utf8_decode( $attribute_name_escaped );
+                array_push( $resultstring, $attribute_name_escaped );
 
                 // works for 3.8 only
-                // array_push($resultstring,$attribute->Name);
+                // array_push( $resultstring, $attribute->Name );
             }
         }
         return $resultstring;
     }
 
-
     function exportInformationCollection( $collections, $attributes_to_export, $seperationChar, $export_type='csv', $days )
     {
-        // eZDebug::writeDebug($attributes_to_export);
+        // eZDebug::writeDebug( $attributes_to_export );
 
         switch( $export_type ){
             case "csv" :
                 $returnstring = array();
+
                 // TODO: Refactor foreach into method
                 array_push( $returnstring, $this->exportCollectionObjectHeaderNew( $collections[0], $attributes_to_export, $seperationChar ) );
+
                 foreach ( $collections as $collection )
                 {
                   if( $days != false )
                   {
-                      $current_datestamp = strtotime("now");
+                      $current_datestamp = strtotime( "now" );
                       $ci_created = $collection->Created;
-                      $range  = mktime(0, 0, 0, date("m")  , date("d")-$days, date("Y"));
+                      $range  = mktime( 0, 0, 0, date( "m" ), date( "d" )-$days, date( "Y" ) );
 
                       /*
                          print_r( $collection );
@@ -152,27 +227,29 @@ var $exportableDatatypes;
                       if( $ci_created < $current_datestamp && $ci_created >= $range )
                       {
                         // print_r( "\nCI Date is lt current date and CI Date is gt eq range \n" );
-                        array_push( $returnstring, $this->exportCollectionObject($collection, $attributes_to_export, $seperationChar ) );
+                        array_push( $returnstring, $this->exportCollectionObject( $collection, $attributes_to_export, $seperationChar ) );
                       }
                     }
                     else
                     {
-                      array_push( $returnstring, $this->exportCollectionObject($collection, $attributes_to_export, $seperationChar ) );
+                      array_push( $returnstring, $this->exportCollectionObject( $collection, $attributes_to_export, $seperationChar ) );
                     }
-                    // array_push($returnstring, $this->exportCollectionObject( $collection, $attributes_to_export, $seperationChar ) );
+                    // array_push( $returnstring, $this->exportCollectionObject( $collection, $attributes_to_export, $seperationChar ) );
                 }
                 return $this->csv( $returnstring,$seperationChar );
                 break;
             case "sylk":
                 $returnstring = array();
-                // array_push($returnstring, $this->exportCollectionObjectHeader($attributes_to_export));
-            // TODO: Refactor foreach into method
-                foreach ( $collections as $collection ) {
+                // array_push( $returnstring, $this->exportCollectionObjectHeader( $attributes_to_export ) );
+                // TODO: Refactor foreach into method
+
+                foreach ( $collections as $collection )
+                {
                   if( $days != false )
                   {
                     $current_datestamp = strtotime("now");
                     $ci_created = $collection->Created;
-                    $range  = mktime(0, 0, 0, date("m")  , date("d")-$days, date("Y"));
+                    $range  = mktime( 0, 0, 0, date( "m" ), date( "d" )-$days, date( "Y" ) );
                     /*
                                      print_r( $collection );
                                      print_r( "\n##################################" );
@@ -198,13 +275,15 @@ var $exportableDatatypes;
             default:
                 $export_type='csv';
                 $returnstring = array();
+
                 // TODO: Refactor foreach into method
-                foreach ($collections as $collection) {
+                foreach ( $collections as $collection )
+                {
                   if( $days != false )
                   {
                       $current_datestamp = strtotime("now");
                       $ci_created = $collection->Created;
-                      $range  = mktime(0, 0, 0, date("m")  , date("d")-$days, date("Y"));
+                      $range  = mktime( 0, 0, 0, date( "m" ), date( "d" )-$days, date( "Y" ) );
                       /*
                                      print_r( $collection );
                                      print_r( "\n##################################" );
@@ -396,7 +475,6 @@ var $exportableDatatypes;
     /*
      * CSV EXPORT
      */
-
     function csv( $tableau, $seperator )
     {
         if ( $tableau )
