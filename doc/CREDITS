@@ -19,3 +19,5 @@ Support for the ezoption and ezcountry datatype and csv header export from githu
 Improved support for the ezselection datatype from Guillaume Kulakowski, projects.ez.no/cie/forum/general/bug_with_ezselection_and_cie_1_0_4
 
 Support for the eztime, ezdate, ezdatetime and ezboolean datatypes from Brookins Consulting, brookinsconsulting.com
+
+Parser improvements from github.com/Open-Wide
