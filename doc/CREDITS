@@ -21,3 +21,5 @@ Improved support for the ezselection datatype from Guillaume Kulakowski, project
 Support for the eztime, ezdate, ezdatetime and ezboolean datatypes from Brookins Consulting, brookinsconsulting.com
 
 Parser improvements from github.com/Open-Wide
+
+Code Standards improvements from Brookins Consulting, brookinsconsulting.com

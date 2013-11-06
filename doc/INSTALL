@@ -102,10 +102,10 @@ Installing BC CIE extension
    necessary is depends on the file you downloaded.
 
    [tar.gz]
-   tar -zxvf bccie-1_0_7.tar.gz
+   tar -zxvf bccie-1_1_0.tar.gz
 
    [zip]
-   unzip bccie-1_0_7.tar.zip
+   unzip bccie-1_1_0.tar.zip
 
 
 3. (Optional) Git clone the latest GitHub brookinsconsulting bccie extension sources into the extension directory

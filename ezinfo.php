@@ -2,7 +2,7 @@
 /**
  * File containing the bccieInfo class.
  *
- * @copyright Copyright (C) 1999 - 2012 Brookins Consulting. All rights reserved.
+ * @copyright Copyright (C) 1999 - 2014 Brookins Consulting. All rights reserved.
  * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2 (or any later version)
  * @version //autogentag//
  * @package bccie
@@ -13,7 +13,7 @@ class bccieInfo
     {
         return array(
             'Name' => "<a href='http://projects.ez.no/cie'>BC CIE</a> - Collected Information Export",
-            'Version' => "1.0.9",
+            'Version' => "1.1.0",
             'Copyright' => array( "Copyright (C) 1999 - 2014 <a href='http://brookinsconsulting.com'>Brookins Consulting</a>",
                                   "Copyright (C) 2006 - 2007, <a href='http://silverhand.fr/'>Vitalis Mathias</a>" ),
             'Author' => "Brookins Consulting & Vitalis Mathias",
