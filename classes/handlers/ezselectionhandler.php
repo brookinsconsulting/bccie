@@ -7,46 +7,46 @@
  * @version //autogentag//
  * @package bccie
  */
-include_once('extension/bccie/classes/parser.php');
+include_once( 'extension/bccie/classes/parser.php' );
 
 class eZSelectionHandler extends BaseHandler
 {
-   function exportAttribute(&$attribute, $seperationChar)
-   {
-       $ret = false;
+    function exportAttribute( &$attribute, $seperationChar )
+    {
+        $ret = false;
 
-       $content = $attribute->content();
-       $contentObjectAttribute = $attribute->contentObjectAttribute();
-       $contentClassAttribute = $attribute->contentClassAttribute();
-       $contentClassAttributeContent = $contentClassAttribute->content();
+        $content = $attribute->content();
+        $contentObjectAttribute = $attribute->contentObjectAttribute();
+        $contentClassAttribute = $attribute->contentClassAttribute();
+        $contentClassAttributeContent = $contentClassAttribute->content();
 
-       if( isset( $contentClassAttributeContent['options'] ) )
-       {
-           // Build array( id => value ) and put it in cache
-           $options = $contentClassAttributeContent['options'];
-           $attGlobalKey = 'GlobalCollectexportAttribut_'.$contentClassAttribute->ID;
+        if ( isset( $contentClassAttributeContent['options'] ) )
+        {
+            // Build array( id => value ) and put it in cache
+            $options = $contentClassAttributeContent['options'];
+            $attGlobalKey = 'GlobalCollectexportAttribut_' . $contentClassAttribute->ID;
 
-           if( !isset( $GLOBALS[$attGlobalKey] ) )
-           {
-               foreach( $options as $o )
-               {
-                       $GLOBALS[$attGlobalKey][$o['id']] = $o['name'];
-               }
-           }
+            if ( !isset( $GLOBALS[$attGlobalKey] ) )
+            {
+                foreach ( $options as $o )
+                {
+                    $GLOBALS[$attGlobalKey][$o['id']] = $o['name'];
+                }
+            }
 
-           // multi-selection
-           $arrayRet = array();
+            // multi-selection
+            $arrayRet = array();
 
-           foreach( $content as $selectionID )
-           {
-                   $arrayRet[] = $GLOBALS[$attGlobalKey][$selectionID];
-           }
+            foreach ( $content as $selectionID )
+            {
+                $arrayRet[] = $GLOBALS[$attGlobalKey][$selectionID];
+            }
 
-           $ret = implode( ', ', $arrayRet );
-       }
+            $ret = implode( ', ', $arrayRet );
+        }
 
-       return $this->escape($ret, $seperationChar);
-   }
+        return $this->escape( $ret, $seperationChar );
+    }
 }
 
 ?>

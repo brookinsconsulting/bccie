@@ -8,18 +8,23 @@
  * @package bccie
  */
 
-include_once('extension/bccie/classes/parser.php');
-include_once('extension/bccie/classes/basehandler.php');
+include_once( 'extension/bccie/classes/parser.php' );
+include_once( 'extension/bccie/classes/basehandler.php' );
 
-class eZOptionHandler extends BaseHandler {
+class eZOptionHandler extends BaseHandler
+{
 
-    function exportAttribute(&$attribute, $seperationChar) {
-            $ret = false;
-            $objectAttribute = $attribute->contentObjectAttribute();
-            $objectAttributeContent = $objectAttribute->content();
-            if($objectAttributeContent->Options)
-                    $ret = $objectAttributeContent->Options[$attribute->DataInt]['value'];
-            return $this->escape($ret, $seperationChar);
+    function exportAttribute( &$attribute, $seperationChar )
+    {
+        $ret = false;
+        $objectAttribute = $attribute->contentObjectAttribute();
+        $objectAttributeContent = $objectAttribute->content();
+        if ( $objectAttributeContent->Options )
+        {
+            $ret = $objectAttributeContent->Options[$attribute->DataInt]['value'];
+        }
+
+        return $this->escape( $ret, $seperationChar );
     }
 }
 

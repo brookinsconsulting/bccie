@@ -8,11 +8,13 @@
  * @package bccie
  */
 
-include_once('extension/bccie/classes/basehandler.php');
+include_once( 'extension/bccie/classes/basehandler.php' );
 
-class eZIdentifierHandler extends BaseHandler {
-    function exportAttribute(&$attribute, $seperationChar) {
-        return $this->escape($attribute->content(), $seperationChar);
+class eZIdentifierHandler extends BaseHandler
+{
+    function exportAttribute( &$attribute, $seperationChar )
+    {
+        return $this->escape( $attribute->content(), $seperationChar );
     }
 }
 

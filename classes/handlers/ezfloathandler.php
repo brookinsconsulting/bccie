@@ -8,12 +8,14 @@
  * @package bccie
  */
 
-include_once('extension/bccie/classes/basehandler.php');
+include_once( 'extension/bccie/classes/basehandler.php' );
 
-class eZFloatHandler extends BaseHandler {
+class eZFloatHandler extends BaseHandler
+{
 
-    function exportAttribute(&$attribute, $seperationChar) {
-        return $this->escape($attribute->content(), $seperationChar);
+    function exportAttribute( &$attribute, $seperationChar )
+    {
+        return $this->escape( $attribute->content(), $seperationChar );
     }
 }
 

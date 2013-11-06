@@ -7,12 +7,14 @@
  * @version //autogentag//
  * @package bccie
  */
-include_once('extension/bccie/classes/basehandler.php');
+include_once( 'extension/bccie/classes/basehandler.php' );
 
-class eZEmailHandler extends BaseHandler {
+class eZEmailHandler extends BaseHandler
+{
 
-    function exportAttribute(&$attribute, $seperationChar) {
-        return $this->escape($attribute->content(), $seperationChar);
+    function exportAttribute( &$attribute, $seperationChar )
+    {
+        return $this->escape( $attribute->content(), $seperationChar );
     }
 }
 

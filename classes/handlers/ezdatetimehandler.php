@@ -8,11 +8,13 @@
  * @package bccie
  */
 
-include_once('extension/bccie/classes/basehandler.php');
+include_once( 'extension/bccie/classes/basehandler.php' );
 
-class eZDateTimeHandler extends BaseHandler {
-    function exportAttribute(&$attribute, $seperationChar) {
-        return $this->escape($attribute->content()->toString(), $seperationChar);
+class eZDateTimeHandler extends BaseHandler
+{
+    function exportAttribute( &$attribute, $seperationChar )
+    {
+        return $this->escape( $attribute->content()->toString(), $seperationChar );
     }
 }
 

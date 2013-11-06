@@ -8,26 +8,32 @@
  * @package bccie
  */
 
-include_once('extension/bccie/classes/basehandler.php');
+include_once( 'extension/bccie/classes/basehandler.php' );
 
-class ezenhancedobjectrelationHandler extends BaseHandler {
+class ezenhancedobjectrelationHandler extends BaseHandler
+{
 
-    function exportAttribute(&$attribute, $seperationChar) {
-                $content=$attribute->content();
-                $id_list=$content['id_list'];
+    function exportAttribute( &$attribute, $seperationChar )
+    {
+        $content = $attribute->content();
+        $id_list = $content['id_list'];
 
-                $ini = eZINI::instance( "csv.ini" );
-                if ($ini->variable( "ezenhancedobjectrelation", "OutputRelatedObjectNames" )) {
-                    $names=array();
-                    foreach ($id_list as $id) {
-                        $object=eZContentObject::fetch($id);
-                        $names[]=$object->name();
-                    }
-            return $this->escape( join(" ", $names) , $seperationChar);
+        $ini = eZINI::instance( "csv.ini" );
+        if ( $ini->variable( "ezenhancedobjectrelation", "OutputRelatedObjectNames" ) )
+        {
+            $names = array();
+            foreach ( $id_list as $id )
+            {
+                $object = eZContentObject::fetch( $id );
+                $names[] = $object->name();
+            }
 
-                }
-                else {
-            return $this->escape( join(" ", $id_list ) , $seperationChar);
+            return $this->escape( join( " ", $names ), $seperationChar );
+
+        }
+        else
+        {
+            return $this->escape( join( " ", $id_list ), $seperationChar );
         }
     }
 }

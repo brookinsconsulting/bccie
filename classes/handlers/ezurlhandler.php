@@ -8,13 +8,16 @@
  * @package bccie
  */
 
-include_once('extension/bccie/classes/basehandler.php');
+include_once( 'extension/bccie/classes/basehandler.php' );
 
-class eZURLHandler extends BaseHandler {
+class eZURLHandler extends BaseHandler
+{
 
-    function exportAttribute(&$attribute, $seperationChar) {
-        $tempstring=$attribute->content() . $seperationChar . $attribute->DataText;
-        return $this->escape($tempstring, $seperationChar);
+    function exportAttribute( &$attribute, $seperationChar )
+    {
+        $tempstring = $attribute->content() . $seperationChar . $attribute->DataText;
+
+        return $this->escape( $tempstring, $seperationChar );
     }
 }
 

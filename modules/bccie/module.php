@@ -30,9 +30,12 @@ $ViewList['overview'] = array(
     'default_navigation_part' => 'bccie',
     'ui_context' => 'view', // 'ui_context' => 'administration',
     'unordered_params' => array( 'offset' => 'Offset' ),
-    'single_post_actions' => array( 'RemoveObjectCollectionButton' => 'RemoveObjectCollection',
-                                    'ConfirmRemoveButton' => 'ConfirmRemoval',
-                                    'CancelRemoveButton' => 'CancelRemoval' ) );
+    'single_post_actions' => array(
+        'RemoveObjectCollectionButton' => 'RemoveObjectCollection',
+        'ConfirmRemoveButton' => 'ConfirmRemoval',
+        'CancelRemoveButton' => 'CancelRemoval'
+    )
+);
 
 $ViewList['export'] = array(
     'script' => 'export.php',
@@ -40,7 +43,8 @@ $ViewList['export'] = array(
     'default_navigation_part' => 'bccienavigationpart',
     'ui_context' => 'view', // 'ui_context' => 'administration',
     'params' => array( 'ObjectID' ),
-    'unordered_params' => array() );
+    'unordered_params' => array()
+);
 
 $ViewList['doexport'] = array(
     'script' => 'doexport.php',
@@ -48,7 +52,8 @@ $ViewList['doexport'] = array(
     'default_navigation_part' => 'bccienavigationpart',
     'ui_context' => 'view',
     'params' => array( 'ObjectID' ),
-    'unordered_params' => array() );
+    'unordered_params' => array()
+);
 
 $FunctionList['read'] = array();
 

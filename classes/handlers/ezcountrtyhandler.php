@@ -7,16 +7,21 @@
  * @version //autogentag//
  * @package bccie
  */
-include_once('extension/bccie/classes/basehandler.php');
+include_once( 'extension/bccie/classes/basehandler.php' );
 
-class eZCountryHandler extends BaseHandler {
-    function exportAttribute(&$attribute, $seperationChar) {
+class eZCountryHandler extends BaseHandler
+{
+    function exportAttribute( &$attribute, $seperationChar )
+    {
         $ret = false;
         $objectAttribute = $attribute->contentObjectAttribute();
         $objectAttributeContent = $attribute->content();
-        if($objectAttributeContent['value'])
+        if ( $objectAttributeContent['value'] )
+        {
             $ret = $objectAttributeContent['value'][$attribute->DataText]['Name'];
-        return $this->escape($ret, $seperationChar);
+        }
+
+        return $this->escape( $ret, $seperationChar );
     }
 }
 
