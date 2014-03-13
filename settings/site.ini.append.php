@@ -6,9 +6,12 @@
 [RegionalSettings]
 TranslationExtensions[]=bccie
 
-[RoleSettings]
-PolicyOmitList[]=bccie/overview
-PolicyOmitList[]=bccie/export
-PolicyOmitList[]=bccie/doexport
+#
+# Uncomment the following to enable module views regardless of missing role policy configuration
+#
+# [RoleSettings]
+# PolicyOmitList[]=bccie/overview
+# PolicyOmitList[]=bccie/export
+# PolicyOmitList[]=bccie/doexport
 
 */ ?>
