@@ -22,4 +22,6 @@ Support for the eztime, ezdate, ezdatetime and ezboolean datatypes from Brookins
 
 Parser improvements from github.com/Open-Wide
 
+Fix UTF-8 BOM for Excel from github.com/matthewkp
+
 Code Standards improvements from Brookins Consulting, brookinsconsulting.com
