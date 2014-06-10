@@ -124,6 +124,7 @@ switch ( $export_type )
 }
 
 header( "Content-Disposition: attachment; filename=$filename" );
+echo "\xEF\xBB\xBF";
 
 echo "\xEF\xBB\xBF";
 
