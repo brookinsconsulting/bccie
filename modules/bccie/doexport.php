@@ -125,6 +125,8 @@ switch ( $export_type )
 
 header( "Content-Disposition: attachment; filename=$filename" );
 
+echo "\xEF\xBB\xBF";
+
 $export_string = $parser->exportInformationCollection(
                         $collections,
                             $attributes_to_export,
