@@ -2,7 +2,7 @@
 /**
  * File containing the bccie module definition.
  *
- * @copyright Copyright (C) 1999 - 2012 Brookins Consulting. All rights reserved.
+ * @copyright Copyright (C) 1999 - 2014 Brookins Consulting. All rights reserved.
  * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2 (or any later version)
  * @version //autogentag//
  * @package bccie
@@ -12,7 +12,7 @@
 // Author : Mathias VITALIS
 // www.silverhand.fr
 //
-// This module allows for easy export collected informations 
+// This module allows for easy export collected informations
 // from contentobjects to csv or sylk files
 //
 // Inspired from the csv export module from Gabriel Ambuehl.
@@ -30,9 +30,12 @@ $ViewList['overview'] = array(
     'default_navigation_part' => 'bccie',
     'ui_context' => 'view', // 'ui_context' => 'administration',
     'unordered_params' => array( 'offset' => 'Offset' ),
-    'single_post_actions' => array( 'RemoveObjectCollectionButton' => 'RemoveObjectCollection',
-                                    'ConfirmRemoveButton' => 'ConfirmRemoval',
-                                    'CancelRemoveButton' => 'CancelRemoval' ) );
+    'single_post_actions' => array(
+        'RemoveObjectCollectionButton' => 'RemoveObjectCollection',
+        'ConfirmRemoveButton' => 'ConfirmRemoval',
+        'CancelRemoveButton' => 'CancelRemoval'
+    )
+);
 
 $ViewList['export'] = array(
     'script' => 'export.php',
@@ -40,7 +43,8 @@ $ViewList['export'] = array(
     'default_navigation_part' => 'bccienavigationpart',
     'ui_context' => 'view', // 'ui_context' => 'administration',
     'params' => array( 'ObjectID' ),
-    'unordered_params' => array() );
+    'unordered_params' => array()
+);
 
 $ViewList['doexport'] = array(
     'script' => 'doexport.php',
@@ -48,7 +52,8 @@ $ViewList['doexport'] = array(
     'default_navigation_part' => 'bccienavigationpart',
     'ui_context' => 'view',
     'params' => array( 'ObjectID' ),
-    'unordered_params' => array() );
+    'unordered_params' => array()
+);
 
 $FunctionList['read'] = array();
 

@@ -12,17 +12,17 @@ into to csv or sylk (Excel) export files.
 BC CIE version
 =======================
 
-The current version of BC CIE is 1.0.6
-Last Major update: May 12, 2013
+The current version of BC CIE is 1.1.0
+Last Major update: November 6, 2013
 
 You can find details about changes for this
-version in doc/changelogs/CHANGELOG-1.0.6
+version in doc/changelogs/CHANGELOG-1.1.0
 
 
 Copyright
 =========
 
-BC CIE is copyright 1999 - 2012 Brookins consulting and Mathias VITALIS
+BC CIE is copyright 1999 - 2014 Brookins Consulting and Mathias VITALIS
 
 See: doc/COPYRIGHT for more information on the terms of the copyright and license
 
