@@ -179,7 +179,7 @@ class Parser
                     }
                 }
 
-                if ( $exportedAttribute )
+                if ( $exportedAttribute !== false )
                 {
                     array_push( $resultstring, utf8_encode( $exportedAttribute ) );
                 }
