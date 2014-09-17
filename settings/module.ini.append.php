@@ -2,5 +2,5 @@
 
 [ModuleSettings]
 ExtensionRepositories[]=bccie
-
+ModuleList[]=bccie
 */ ?>
