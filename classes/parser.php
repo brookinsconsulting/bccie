@@ -181,7 +181,7 @@ class Parser
 
                 $emptyAttributeExport = eZINI::instance( "cie.ini" )->variable( "CieSettings", "EmptyAttributeExport" ) === 'enabled';
 
-                if ( ( $emptyAttributeExport && $exportedAttribute !== false ) || ( !$emptyAttributeExport && $exportedAttribute ) )
+                if ( ( !$emptyAttributeExport && $exportedAttribute !== false ) || ( $emptyAttributeExport && $exportedAttribute ) )
                 {
                     array_push( $resultstring, utf8_encode( $exportedAttribute ) );
                 }
