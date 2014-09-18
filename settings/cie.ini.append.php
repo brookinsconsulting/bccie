@@ -52,4 +52,8 @@ SylkFormat=sylk
 # Sylk Export Separator
 SylkSeparator=;
 
+# Optional setting to enable export of 0 instead
+# of empty string when attribute value is empty
+EmptyAttributeExport=enabled
+
 */ ?>
