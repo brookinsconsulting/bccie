@@ -152,6 +152,8 @@ class Parser
     function exportCollectionObject( &$collection, &$attributes_to_export, $seperationChar )
     {
         $resultstring = array();
+        $emptyAttributeExport = eZINI::instance( "cie.ini" )->variable( "CieSettings", "ExportZeroToEmptyString" ) === 'enabled';
+
         foreach ( $attributes_to_export as $attributeid )
         {
             if ( $attributeid == "contentobjectid" )
@@ -178,8 +180,6 @@ class Parser
                         );
                     }
                 }
-
-                $emptyAttributeExport = eZINI::instance( "cie.ini" )->variable( "CieSettings", "EmptyAttributeExport" ) === 'enabled';
 
                 if ( ( !$emptyAttributeExport && $exportedAttribute !== false ) || ( $emptyAttributeExport && $exportedAttribute ) )
                 {
