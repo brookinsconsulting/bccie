@@ -18,7 +18,8 @@ ExportableDatatypes[]=ezcountry
 ExportableDatatypes[]=eztime
 ExportableDatatypes[]=ezdate
 ExportableDatatypes[]=ezdatetime
-
+ExportableDatatypes[]=ezobjectrelation
+ExportableDatatypes[]=owenhancedselection
 
 # All handlerfiles are sought in the base directory,
 # extension/bccie/modules/bccie/,
@@ -91,5 +92,14 @@ HandlerClass=eZTimeHandler
 [ezdate]
 HandlerFile=ezdatehandler.php
 HandlerClass=eZDateHandler
+
+[ezobjectrelation]
+HandlerFile=ezobjectrelationhandler.php
+HandlerClass=eZObjectrelationHandler
+OutputRelatedObjectNames=true
+
+[owenhancedselection]
+HandlerFile=owenhancedselectionhandler.php
+HandlerClass=OWEnhancedselectionHandler
 
 */ ?>
