@@ -18,7 +18,7 @@ class ezenhancedobjectrelationHandler extends BaseHandler
         $content = $attribute->content();
         $id_list = $content['id_list'];
 
-        $ini = eZINI::instance( "csv.ini" );
+        $ini = eZINI::instance( "export.ini" );
         if ( $ini->variable( "ezenhancedobjectrelation", "OutputRelatedObjectNames" ) )
         {
             $names = array();
