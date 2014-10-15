@@ -54,7 +54,7 @@
 <input name="end_year" class="box" size="5" value="{$end_year|wash}" />
 </div>
 </div>
-<div align="right"> 
+<div align="right">
 {section show=$collection_array}
 <input class="button" style="position:relative;top:-10px;" type="submit" name="DoExport" value="{'Do export'|i18n( 'design/bccie/export' )}" title="{'Do export.'|i18n( 'design/bccie/export' )}" />
 {section-else}
@@ -70,6 +70,22 @@
 <div class="break"></div>
 </div>
 </div>
+
+{*export create and modification date*}
+<fieldset>
+    <legend>{'Export creation and modification date'|i18n( 'design/bccie/export' )}</legend>
+    <div class="block">
+        <div class="element">
+            {'Export Creation Date'|i18n( 'design/bccie/export' )}:
+            <input name="creation_date" type="checkbox" value="1" />
+        </div>
+        <div class="element">
+            {'Export Modification Date'|i18n( 'design/bccie/export' )}:
+            <input name="modification_date" type="checkbox" value="1" />
+        </div>
+    </div>
+    <div class="break"></div>
+</fieldset>
 
 {* Collection table. *}
 {let counter=0}
@@ -99,7 +115,7 @@
                                 <legend>{'Field #%counter'|i18n('design/bccie/export',, hash( '%counter', $counter) )}</legend>
                                     <select name="field_{$counter}">
                                         <option selected="selected" value="contentobjectid">Content object id</option>
-                                
+
                                         {section loop=$class.data_map}
                                                 {let current_inner_attribute=$:item}
                                                         {section show=$current_inner_attribute.is_information_collector }
@@ -118,7 +134,7 @@
                                 {set counter=inc( $counter )}
                         {/section}
                 {/let}
-                
+
         {/section}
 {/let}
 {/let}

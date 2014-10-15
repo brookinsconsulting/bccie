@@ -71,6 +71,26 @@
     <message>
         <source>Do export</source>
         <translation>Exportieren</translation>
-    </message>    
+    </message>
+    <message>
+        <source>Export Creation Date</source>
+        <translation>Erstellungsdatum exportieren</translation>
+    </message>
+    <message>
+        <source>Export Modification Date</source>
+        <translation>Änderungsdatum exportieren</translation>
+    </message>
+    <message>
+        <source>Export Modification Date</source>
+        <translation>Änderungsdatum exportieren</translation>
+    </message>
+    <message>
+        <source>created</source>
+        <translation>erstellt</translation>
+    </message>
+    <message>
+        <source>modified</source>
+        <translation>geändert</translation>
+    </message>
 </context>
 </TS>

@@ -18,6 +18,8 @@ class Parser
     var $handlerMap = array();
     var $exportableDatatypes;
     var $contentClassCollectorAttributes;
+    var $exportCreationDate;
+    var $exportModificationDate;
 
     function Parser( $objectID = false )
     {
@@ -146,6 +148,23 @@ class Parser
             }
         }
 
+        if ( $this->getCreationDate() === true )
+        {
+            //TODO: i18n
+                array_push(
+                    $resultstring,
+                    ezpI18n::tr( "design/bccie/export", "created" )
+                );
+        }
+        if ( $this->getModificationDate() === true )
+        {
+            //TODO: i18n
+                array_push(
+                    $resultstring,
+                    ezpI18n::tr( "design/bccie/export", "modified" )
+                );
+        }
+
         return $resultstring;
     }
 
@@ -192,6 +211,16 @@ class Parser
             }
         }
 
+        if ( $this->getCreationDate() === true )
+        {
+            array_push( $resultstring, date( 'c', $collection->attribute( 'created' ) ) );
+        }
+
+        if ( $this->getModificationDate() === true )
+        {
+            array_push( $resultstring, date( 'c', $collection->attribute( 'modified' ) ) );
+        }
+
         return $resultstring;
     }
 
@@ -229,10 +258,21 @@ class Parser
         $attributes_to_export,
         $seperationChar,
         $export_type = 'csv',
-        $days
+        $days,
+        $creation_date = false,
+        $modification_date = false
     )
     {
         // eZDebug::writeDebug( $attributes_to_export );
+        if ( $creation_date !== false )
+        {
+            $this->setCreationDate( true );
+        }
+
+        if ( $modification_date !== false )
+        {
+            $this->setModificationDate( true );
+        }
 
         switch ( $export_type )
         {
@@ -616,6 +656,24 @@ class Parser
         }
     }
 
+    public function setModificationDate( $date )
+    {
+        $this->modificationDate = $date;
+    }
+
+    public function setCreationDate( $date )
+    {
+        $this->creationDate = $date;
+    }
+
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+    public function getModificationDate()
+    {
+        return $this->modificationDate;
+    }
 }
 
 ?>
