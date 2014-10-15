@@ -92,5 +92,9 @@
         <source>modified</source>
         <translation>geändert</translation>
     </message>
+    <message>
+        <source>Export creation and modification date</source>
+        <translation>Erstellungsdatum und Änderungsdatum exportieren</translation>
+    </message>
 </context>
 </TS>
