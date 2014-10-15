@@ -125,8 +125,6 @@ switch ( $export_type )
 
 header( "Content-Disposition: attachment; filename=$filename" );
 
-echo "\xEF\xBB\xBF";
-
 $export_string = $parser->exportInformationCollection(
                         $collections,
                             $attributes_to_export,
@@ -135,7 +133,7 @@ $export_string = $parser->exportInformationCollection(
                             $days
 );
 
-echo( $export_string );
+print chr(255) . chr(254) . mb_convert_encoding($export_string, 'UTF-16LE', 'UTF-8');
 
 flush();
 
