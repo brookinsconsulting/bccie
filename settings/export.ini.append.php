@@ -18,6 +18,7 @@ ExportableDatatypes[]=ezcountry
 ExportableDatatypes[]=eztime
 ExportableDatatypes[]=ezdate
 ExportableDatatypes[]=ezdatetime
+ExportableDatatypes[]=smileobjectrelationlist
 
 
 # All handlerfiles are sought in the base directory,
@@ -91,5 +92,9 @@ HandlerClass=eZTimeHandler
 [ezdate]
 HandlerFile=ezdatehandler.php
 HandlerClass=eZDateHandler
+
+[smileobjectrelationlist]
+HandlerFile=smileobjectrelationlisthandler.php
+HandlerClass=smileobjectrelationlistHandler
 
 */ ?>
