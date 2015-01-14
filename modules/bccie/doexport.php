@@ -8,12 +8,6 @@
  * @package bccie
  */
 
-include_once( 'kernel/classes/ezcontentclass.php' );
-include_once( 'kernel/classes/ezinformationcollection.php' );
-include_once( 'lib/ezutils/classes/ezhttptool.php' );
-include_once( 'extension/bccie/classes/parser.php' );
-include_once( 'lib/ezutils/classes/ezexecution.php' );
-
 header( "Content-type:text/csv; charset=utf-8" );
 
 $http = eZHTTPTool::instance();

@@ -8,12 +8,6 @@
  * @package bccie
  */
 
-include_once( 'kernel/classes/ezcontentobject.php' );
-include_once( 'kernel/classes/ezinformationcollection.php' );
-include_once( 'kernel/common/template.php' );
-include_once( 'kernel/common/i18n.php' );
-// include_once( 'kernel/classes/ezpreferences.php' );
-
 $http = eZHTTPTool::instance();
 $module = $Params['Module'];
 $objectID = $Params['ObjectID'];
