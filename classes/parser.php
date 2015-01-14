@@ -8,10 +8,6 @@
  * @package bccie
  */
 
-include_once( 'lib/ezutils/classes/ezini.php' );
-include_once( 'extension/bccie/classes/basehandler.php' );
-include_once( 'kernel/classes/ezcontentobjecttreenode.php' );
-
 class Parser
 {
 
@@ -26,8 +22,6 @@ class Parser
 
         foreach ( $this->exportableDatatypes as $typename )
         {
-            include_once( "extension/bccie/classes/" . $ini->variable( $typename, 'HandlerFile' ) );
-
             $classname = $ini->variable( $typename, 'HandlerClass' );
             $handler = new $classname;
             $this->handlerMap[$typename] = array( "handler" => $handler, "exportable" => true );
@@ -60,9 +54,13 @@ class Parser
     function exportAttribute( &$attribute, $seperationChar )
     {
         $ret = false;
-        $handler = $this->handlerMap[eZContentClassAttribute::dataTypeByID(
-                                                            $attribute->ContentClassAttributeID
-        )]['handler'];
+        $datatypeName = eZContentClassAttribute::dataTypeByID( $attribute->ContentClassAttributeID );
+
+        if (array_key_exists ( $datatypeName , $this->handlerMap )) {
+            $handler = $this->handlerMap[$datatypeName]['handler'];
+        } else {
+            $handler = new BaseHandler();
+        }
 
         /*
         BC: Error Debug Comment Test Case Output
@@ -134,14 +132,13 @@ class Parser
 
         foreach ( $attributes_to_export as $classAttributeID )
         {
-            if ( is_numeric( $classAttributeID ) )
+            $contentClassAttribute = eZContentClassAttribute::fetch( $classAttributeID );
+
+            if ( $contentClassAttribute instanceof eZContentClassAttribute )
             {
                 array_push(
                     $resultstring,
-                    $this->exportAttributeHeader(
-                         eZContentClassAttribute::fetch( $classAttributeID ),
-                             $seperationChar
-                    )
+                    $this->exportAttributeHeader( $contentClassAttribute, $seperationChar )
                 );
             }
         }

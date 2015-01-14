@@ -13,6 +13,7 @@ class BaseHandler
     //place holder
     function exportAttribute( &$attribute, $separationChar )
     {
+        return $this->escape( $attribute->content(), $separationChar );
     }
 
     //escape the string to use it in a CSV file type
