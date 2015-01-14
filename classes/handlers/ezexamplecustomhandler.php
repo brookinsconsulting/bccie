@@ -8,8 +8,6 @@
  * @package bccie
  */
 
-include_once( 'extension/bccie/modules/bccie/basehandler.php' );
-
 class eZExampleCustomHandler extends BaseHandler
 {
     function exportAttribute( &$attribute, $seperationChar )

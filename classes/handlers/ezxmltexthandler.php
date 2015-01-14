@@ -8,8 +8,6 @@
  * @package bccie
  */
 
-include_once( 'extension/bccie/classes/parser.php' );
-
 class eZXMLTextHandler extends BaseHandler
 {
     function exportAttribute( &$attribute, $seperationChar )
