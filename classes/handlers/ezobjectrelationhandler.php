@@ -8,7 +8,6 @@
  * @package bccie
  */
 
-
 class eZObjectrelationHandler extends BaseHandler
 {
 
