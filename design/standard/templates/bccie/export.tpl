@@ -86,7 +86,6 @@
                                 {/section}
                         {/let}
                 {/section}
-                <option value="-1"> {'Leave empty (note: field still gets created)'|i18n('design/bccie/export')} </option>
                 <option value="-2"> {"Ignore (note: field doesn't get created at all)"|i18n('design/bccie/export')} </option>
             </select>
         </fieldset>
@@ -111,7 +110,6 @@
                                                         {/section}
                                                 {/let}
                                         {/section}
-                                        <option value="-1"> {'Leave empty (note: field still gets created)'|i18n('design/bccie/export')} </option>
                                         <option value="-2"> {"Ignore (note: field doesn't get created at all)"|i18n('design/bccie/export')} </option>
                                      </select>
                                 </fieldset>
