@@ -9,7 +9,7 @@
  */
 
 header( "Content-type:text/csv; charset=utf-8" );
-
+    
 $http = eZHTTPTool::instance();
 $module = $Params['Module'];
 $objectID = $Params['ObjectID'];
@@ -25,53 +25,12 @@ if ( !$object )
     return $module->handleError( EZ_ERROR_KERNEL_NOT_AVAILABLE, 'kernel' );
 }
 
-$conditions = array( 'contentobject_id' => $objectID );
+$conditions['contentobject_id'] = $objectID;
+$dateConditions = BCCIEUtils::getDateConditions( $http );
+$conditions['created'] = $dateConditions['conditions'];
 
-$start = false;
-$end = false;
-$days = false;
-
-if ( $http->hasPostVariable( "start_year" ) )
-{
-    $start = mktime(
-        0,
-        0,
-        0,
-        (int)$http->postVariable( "start_month" ),
-        (int)$http->postVariable( "start_day" ),
-        (int)$http->postVariable( "start_year" )
-    );
-}
-if ( $http->hasPostVariable( "end_year" ) )
-{
-    $end = mktime(
-        23,
-        59,
-        59,
-        (int)$http->postVariable( "end_month" ),
-        (int)$http->postVariable( "end_day" ),
-        (int)$http->postVariable( "end_year" )
-    );
-}
-if ( $start !== false and $end !== false )
-{
-    $days = round( abs( $start - $end ) / 86400 );
-}
-if ( $start !== false and $end !== false )
-{
-    $conditions['created'] = array( false, array( $start, $end ) );
-}
-elseif ( $start !== false and $end === false )
-{
-    $conditions['created'] = array( '>', $start );
-}
-elseif ( $start === false and $end !== false )
-{
-    $conditions['created'] = array( '<', $end );
-}
-set_time_limit( 180 );
 $collections = eZPersistentObject::fetchObjectList(
-                                 eZInformationCollection::definition(),
+                                     eZInformationCollection::definition(),
                                      null,
                                      $conditions,
                                      false,
@@ -100,33 +59,19 @@ while ( true )
 
 $seperation_char = $http->postVariable( "separation_char" );
 $export_type = $http->postVariable( "export_type" );
+$filename = BCCIEUtils::getFileName( $export_type );
 $parser = new Parser( $objectID );
-
-$date_export = date( "d-m-Y" );
-
-switch ( $export_type )
-{
-    case 'csv':
-        $filename = "export_" . $date_export . ".csv";
-        break;
-    case 'sylk':
-        $filename = "export_" . $date_export . ".slk";
-        break;
-    default :
-        $filename = "export_" . $date_export . ".csv";
-        break;
-}
 
 header( "Content-Disposition: attachment; filename=$filename" );
 
 echo "\xEF\xBB\xBF";
 
 $export_string = $parser->exportInformationCollection(
-                        $collections,
+                            $collections,
                             $attributes_to_export,
                             $seperation_char,
                             $export_type,
-                            $days
+                            $dateConditions['days']
 );
 
 echo( $export_string );
