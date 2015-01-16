@@ -56,6 +56,10 @@ SylkSeparator=;
 # string instead of "0" collected value
 ExportZeroToEmptyString=disabled
 
+# Required setting to controle the maximum export
+# execution time limit
+ExportExecutionTimeLimit=180
+
 # Optional setting to disable display
 # of 'Leave empty (note: field still gets created)'
 # option in export module view

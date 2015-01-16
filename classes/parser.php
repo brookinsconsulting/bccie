@@ -14,8 +14,8 @@ class Parser
     var $handlerMap = array();
     var $exportableDatatypes;
     var $contentClassCollectorAttributes;
-    var $exportCreationDate;
-    var $exportModificationDate;
+    var $exportCreationDate = false;
+    var $exportModificationDate = false;
 
     function Parser( $objectID = false )
     {
@@ -150,14 +150,14 @@ class Parser
         {
             array_push(
                 $resultstring,
-                ezpI18n::tr( "design/bccie/export", "created" )
+                ezpI18n::tr( "design/bccie/export", "Created" )
             );
         }
         if ( $this->getModificationDate() === true )
         {
             array_push(
                 $resultstring,
-                ezpI18n::tr( "design/bccie/export", "modified" )
+                ezpI18n::tr( "design/bccie/export", "Modified" )
             );
         }
 
@@ -654,21 +654,21 @@ class Parser
 
     public function setModificationDate( $date )
     {
-        $this->modificationDate = $date;
+        $this->exportModificationDate = $date;
     }
 
     public function setCreationDate( $date )
     {
-        $this->creationDate = $date;
+        $this->exportCreationDate = $date;
     }
 
     public function getCreationDate()
     {
-        return $this->creationDate;
+        return $this->exportCreationDate;
     }
     public function getModificationDate()
     {
-        return $this->modificationDate;
+        return $this->exportModificationDate;
     }
 }
 
