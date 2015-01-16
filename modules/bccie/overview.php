@@ -94,76 +94,8 @@ else
 }
 
 
-$db = eZDB::instance();
-$objects = $db->arrayQuery(
-              'SELECT DISTINCT ezinfocollection.contentobject_id,
-                                                 ezcontentobject.name,
-                                                 ezcontentobject_tree.main_node_id,
-                                                 ezcontentclass.*,
-                                                 ezcontentclass.identifier AS class_identifier
-                                          FROM   ezinfocollection,
-                                                 ezcontentobject,
-                                                 ezcontentobject_tree,
-                                                 ezcontentclass
-                                          WHERE  ezinfocollection.contentobject_id=ezcontentobject.id
-                                                 AND ezcontentobject.contentclass_id=ezcontentclass.id
-                                                 AND ezinfocollection.contentobject_id=ezcontentobject_tree.contentobject_id',
-                  array(
-                       'limit' => (int)$limit,
-                       'offset' => (int)$offset
-                  )
-);
-
-$infoCollectorObjectsQuery = $db->arrayQuery(
-                                'SELECT COUNT( DISTINCT ezinfocollection.contentobject_id ) as count
-                                                                              FROM ezinfocollection,
-                                                                                   ezcontentobject,
-                                                                                   ezcontentobject_tree
-                                                                              WHERE
-                                                                                   ezinfocollection.contentobject_id=ezcontentobject.id
-                                                                                   AND ezinfocollection.contentobject_id=ezcontentobject_tree.contentobject_id'
-);
-$numberOfInfoCollectorObjects = 0;
-
-if ( $infoCollectorObjectsQuery )
-{
-    $numberOfInfoCollectorObjects = $infoCollectorObjectsQuery[0]['count'];
-}
-
-foreach ( array_keys( $objects ) as $i )
-{
-    $collections = eZInformationCollection::fetchCollectionsList(
-                                          (int)$objects[$i]['contentobject_id'], /* object id */
-                                              false, /* creator id */
-                                              false, /* user identifier */
-                                              false, /* limitArray */
-                                              false, /* sortArray */
-                                              false /* asObject */
-    );
-    $class = new eZContentClass( $objects[$i] );
-    $objects[$i]['class_name'] = $class->attribute( 'name' );
-    $first = $collections[0]['created'];
-    $last = $first;
-
-    for ( $j = 0; $j < count( $collections ); $j++ )
-    {
-        $current = $collections[$j]['created'];
-
-        if ( $current < $first )
-        {
-            $first = $current;
-        }
-
-        if ( $current > $last )
-        {
-            $last = $current;
-        }
-    }
-
-    $objects[$i]['first_collection'] = $first;
-    $objects[$i]['last_collection'] = $last;
-    $objects[$i]['collections'] = count( $collections );
-}
+$objects = bccieExportUtils::getObjectsWithCollectedInformation( $offset , $limit);
+$numberOfInfoCollectorObjects = bccieExportUtils::getCollectorObjectsCount();
 
 $viewParameters = array( 'offset' => $offset );
 
