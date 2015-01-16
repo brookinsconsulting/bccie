@@ -38,12 +38,17 @@ $collections = eZInformationCollection::fetchCollectionsList(
 
 $numberOfCollections = eZInformationCollection::fetchCollectionsCount( $objectID );
 
+$objects = BCCIEUtils::getObjectsWithCollectedInformation();
+$numberOfInfoCollectorObjects = BCCIEUtils::getCollectorObjectsCount();
+
 $viewParameters = array( 'offset' => $offset );
 $objectName = $object->attribute( 'name' );
 
 $tpl = eZTemplate::factory();
 $tpl->setVariable( 'module', $module );
 $tpl->setVariable( 'object', $object );
+$tpl->setVariable( 'object_array', $objects );
+$tpl->setVariable( 'object_count', $numberOfInfoCollectorObjects );
 $tpl->setVariable( 'collection_array', $collections );
 $tpl->setVariable( 'collection_count', $numberOfCollections );
 $tpl->setVariable( 'end_day', date( 'd' ) );
@@ -53,6 +58,7 @@ $tpl->setVariable( 'end_year', date( 'Y' ) );
 $Result = array();
 $Result['content'] = $tpl->fetch( 'design:bccie/export.tpl' );
 $Result['navigation_part'] = 'ezbccienavigationpart';
+$Result['left_menu'] = 'design:bccie/export_menu.tpl';
 $Result['path'] = array(
     array(
         'url' => '/bccie/overview',
