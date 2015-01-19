@@ -81,8 +81,9 @@ class BCCIEUtils {
         $start = false;
         $end = false;
         $days = false;
+        $condition = null;
 
-        if ( $http->hasPostVariable( "start_year" ) && !empty($http->postVariable( "start_year" )) ) {
+        if ( $http->hasPostVariable( "start_year" ) && $http->postVariable( "start_year" ) != '' ) {
             $start = mktime(
                 0,
                 0,
@@ -93,7 +94,7 @@ class BCCIEUtils {
             );
         }
 
-        if ( $http->hasPostVariable( "end_year" ) && !empty($http->postVariable( "end_year" )) ) {
+        if ( $http->hasPostVariable( "end_year" ) && $http->postVariable( "end_year" ) != '' ) {
             $end = mktime(
                 23,
                 59,
@@ -110,7 +111,7 @@ class BCCIEUtils {
 
         if ( $start !== false and $end !== false ) {
             $condition = array( false, array( $start, $end ) );
-        } 
+        }
         elseif ( $start !== false and $end === false ) {
             $condition = array( '>', $start );
         }

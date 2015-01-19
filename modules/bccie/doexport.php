@@ -27,7 +27,9 @@ if ( !$object )
 
 $conditions['contentobject_id'] = $objectID;
 $dateConditions = BCCIEUtils::getDateConditions( $http );
-$conditions['created'] = $dateConditions['conditions'];
+if ($dateConditions['conditions'] != null) {
+    $conditions['created'] = $dateConditions['conditions'];
+}
 
 $collections = eZPersistentObject::fetchObjectList(
                                      eZInformationCollection::definition(),
@@ -71,7 +73,7 @@ $export_string = $parser->exportInformationCollection(
                             $attributes_to_export,
                             $seperation_char,
                             $export_type,
-                            $dateConditions['days']
+                            false
 );
 
 echo( $export_string );
