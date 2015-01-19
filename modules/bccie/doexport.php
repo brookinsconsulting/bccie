@@ -35,7 +35,10 @@ $conditions = array( 'contentobject_id' => $objectID );
 
 $dateConditions = bccieExportUtils::getDateConditions( $http );
 
-$conditions['created'] = $dateConditions['conditions'];
+if ( $dateConditions['conditions'] != null )
+{
+    $conditions['created'] = $dateConditions['conditions'];
+}
 
 $collections = eZPersistentObject::fetchObjectList(
     eZInformationCollection::definition(),
@@ -45,7 +48,7 @@ $collections = eZPersistentObject::fetchObjectList(
     false
 );
 
-//TODO: change error handler
+// TODO: change error handler
 if ( !$collections )
 {
     return $module->handleError( EZ_ERROR_KERNEL_NOT_AVAILABLE, 'kernel' );

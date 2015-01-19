@@ -254,7 +254,7 @@ class Parser
         $attributes_to_export,
         $seperationChar,
         $export_type = 'csv',
-        $days,
+        $days = false,
         $creation_date = false,
         $modification_date = false
     )

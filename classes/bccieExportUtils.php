@@ -97,44 +97,36 @@ class bccieExportUtils
         $start = false;
         $end = false;
         $days = false;
-        $httpPostVariableStartYear = false;
-        $httpPostVariableEndYear = false;
+        $condition = null;
 
-        if( $http->hasPostVariable( "start_year" ) )
+        $cieINI = eZINI::instance( 'cie.ini' );
+        $exportUsingDaysCalcualation = $cieINI->variable( 'CieSettings', 'ExportUsingDaysCalcualation' ) == 'enabled' ? true : false;
+
+        if ( $http->hasPostVariable( "start_year" ) && $http->postVariable( "start_year" ) != '' )
         {
-            $httpPostVariableStartYear = $http->postVariable( "start_year" );
-
-            if ( !empty( $httpPostVariableStartYear ) )
-            {
-                $start = mktime(
-                    0,
-                    0,
-                    0,
-                    (int)$http->postVariable( "start_month" ),
-                    (int)$http->postVariable( "start_day" ),
-                    (int)$httpPostVariableStartYear
-                );
-            }
+            $start = mktime(
+                0,
+                0,
+                0,
+                (int)$http->postVariable( "start_month" ),
+                (int)$http->postVariable( "start_day" ),
+                (int)$http->postVariable( "start_year" )
+            );
         }
 
-        if( $http->hasPostVariable( "end_year" ) )
+        if ( $http->hasPostVariable( "end_year" ) && $http->postVariable( "end_year" ) != '' )
         {
-            $httpPostVariableEndYear = $http->postVariable( "end_year" );
-
-            if ( !empty( $httpPostVariableEndYear ) )
-            {
-                $end = mktime(
-                    23,
-                    59,
-                    59,
-                    (int)$http->postVariable( "end_month" ),
-                    (int)$http->postVariable( "end_day" ),
-                    (int)$httpPostVariableEndYear
-                );
-            }
+            $end = mktime(
+                23,
+                59,
+                59,
+                (int)$http->postVariable( "end_month" ),
+                (int)$http->postVariable( "end_day" ),
+                (int)$http->postVariable( "end_year" )
+            );
         }
 
-        if ( $start !== false and $end !== false )
+        if ( $exportUsingDaysCalcualation && ( $start !== false and $end !== false ) )
         {
             $days = round( abs( $start - $end ) / 86400 );
         }

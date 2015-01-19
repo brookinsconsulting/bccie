@@ -56,9 +56,16 @@ SylkSeparator=;
 # string instead of "0" collected value
 ExportZeroToEmptyString=disabled
 
-# Required setting to controle the maximum export
+# Required setting to control the maximum export
 # execution time limit
 ExportExecutionTimeLimit=180
+
+# Required setting to control the export
+# date range calcuation. This setting
+# disables an older questionable method
+# used to calculate what date range of
+# cie to export
+ExportUsingDaysCalcualation=disabled
 
 # Optional setting to disable display
 # of 'Leave empty (note: field still gets created)'
