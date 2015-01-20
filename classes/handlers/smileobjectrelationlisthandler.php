@@ -1,6 +1,6 @@
 <?php
 /**
- * File containing the smileobjectrelationlist class.
+ * File containing the smileobjectrelationlistHandler class.
  *
  */
 class smileobjectrelationlistHandler extends BaseHandler

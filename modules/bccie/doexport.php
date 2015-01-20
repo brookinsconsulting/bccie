@@ -20,8 +20,8 @@ $http = eZHTTPTool::instance();
 $module = $Params['Module'];
 $objectID = $Params['ObjectID'];
 $object = false;
-$creationDate = false;
-$modificationDate = false;
+$exportCreationDate = false;
+$exportModificationDate = false;
 
 if ( is_numeric( $objectID ) )
 {
@@ -80,12 +80,12 @@ elseif ( $start === false and $end !== false )
 
 if ( $http->hasPostVariable( "creation_date" ) )
 {
-   $creationDate = true;
+   $exportCreationDate = true;
 }
 
 if ( $http->hasPostVariable( "modification_date" ) )
 {
-   $modificationDate = true;
+   $exportModificationDate = true;
 }
 
 set_time_limit( 180 );
@@ -144,8 +144,8 @@ $export_string = $parser->exportInformationCollection(
                             $seperation_char,
                             $export_type,
                             $days,
-                            $creationDate,
-                            $modificationDate
+                            $exportCreationDate,
+                            $exportModificationDate
 );
 
 print chr(255) . chr(254) . mb_convert_encoding($export_string, 'UTF-16LE', 'UTF-8');

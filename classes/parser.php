@@ -150,19 +150,17 @@ class Parser
 
         if ( $this->getCreationDate() === true )
         {
-            //TODO: i18n
-                array_push(
-                    $resultstring,
-                    ezpI18n::tr( "design/bccie/export", "created" )
-                );
+            array_push(
+                $resultstring,
+                ezpI18n::tr( "design/bccie/export", "created" )
+            );
         }
         if ( $this->getModificationDate() === true )
         {
-            //TODO: i18n
-                array_push(
-                    $resultstring,
-                    ezpI18n::tr( "design/bccie/export", "modified" )
-                );
+            array_push(
+                $resultstring,
+                ezpI18n::tr( "design/bccie/export", "modified" )
+            );
         }
 
         return $resultstring;

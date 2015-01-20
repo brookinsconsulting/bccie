@@ -1,3 +1,20 @@
 BC CIE extension FAQ
 
 
+CUSTOM DATATYPES:
+
+The following custom datatypes are also supported by this extension:
+
+- smileobjectrelationlistdatatype (https://github.com/arbito82/smileobjectrelationlistdatatype)
+
+
+PLATFORM SPECIFIC NOTES:
+
+There was a UTF-8 encoding problem with opening files in excel on a mac. Therefore the following modification was made:
+
+modules/bccie/doexport.php
+-echo( $export_string );
++print chr(255) . chr(254) . mb_convert_encoding($export_string, 'UTF-16LE', 'UTF-8');
+
+More information on this issue can be found here:
+http://stackoverflow.com/questions/4348802/how-can-i-output-a-utf-8-csv-in-php-that-excel-will-read-properly

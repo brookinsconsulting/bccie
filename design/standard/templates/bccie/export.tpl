@@ -71,7 +71,7 @@
 </div>
 </div>
 
-{*export create and modification date*}
+{* export create and modification date *}
 <fieldset>
     <legend>{'Export creation and modification date'|i18n( 'design/bccie/export' )}</legend>
     <div class="block">
