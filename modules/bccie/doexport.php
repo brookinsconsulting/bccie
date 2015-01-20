@@ -20,6 +20,8 @@ $http = eZHTTPTool::instance();
 $module = $Params['Module'];
 $objectID = $Params['ObjectID'];
 $object = false;
+$exportCreationDate = false;
+$exportModificationDate = false;
 
 if ( is_numeric( $objectID ) )
 {
@@ -75,6 +77,17 @@ elseif ( $start === false and $end !== false )
 {
     $conditions['created'] = array( '<', $end );
 }
+
+if ( $http->hasPostVariable( "creation_date" ) )
+{
+   $exportCreationDate = true;
+}
+
+if ( $http->hasPostVariable( "modification_date" ) )
+{
+   $exportModificationDate = true;
+}
+
 set_time_limit( 180 );
 $collections = eZPersistentObject::fetchObjectList(
                                  eZInformationCollection::definition(),
@@ -125,17 +138,17 @@ switch ( $export_type )
 
 header( "Content-Disposition: attachment; filename=$filename" );
 
-echo "\xEF\xBB\xBF";
-
 $export_string = $parser->exportInformationCollection(
                         $collections,
                             $attributes_to_export,
                             $seperation_char,
                             $export_type,
-                            $days
+                            $days,
+                            $exportCreationDate,
+                            $exportModificationDate
 );
 
-echo( $export_string );
+print chr(255) . chr(254) . mb_convert_encoding($export_string, 'UTF-16LE', 'UTF-8');
 
 flush();
 
