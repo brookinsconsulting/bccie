@@ -28,7 +28,7 @@ class Parser
 
         foreach ( $this->exportableDatatypes as $typename )
         {
-            include_once( "extension/bccie/classes/" . $ini->variable( $typename, 'HandlerFile' ) );
+            include_once( "extension/bccie/classes/handlers/" . $ini->variable( $typename, 'HandlerFile' ) );
 
             $classname = $ini->variable( $typename, 'HandlerClass' );
             $handler = new $classname;
