@@ -210,7 +210,7 @@ class Parser
                 $attribute = & eZContentClassAttribute::fetch( $attributeid );
                 $attribute_name = $attribute->name();
                 $attribute_name_escaped = preg_replace( "(\r\n|\n|\r)", " ", $attribute_name );
-                $attribute_name_escaped = utf8_decode( $attribute_name_escaped );
+                $attribute_name_escaped = mb_convert_encoding( $attribute_name_escaped , 'CP1252');
                 array_push( $resultstring, $attribute_name_escaped );
 
                 // works for 3.8 only

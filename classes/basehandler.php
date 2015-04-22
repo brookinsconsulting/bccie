@@ -21,7 +21,7 @@ class BaseHandler
     {
         $stringtoescape = preg_replace( "(\r\n|\n|\r)", " ", $stringtoescape );
 
-        return utf8_decode( $stringtoescape );
+        return  mb_convert_encoding($stringtoescape , 'CP1252');
         // return addcslashes($stringtoescape, "$separationChar\0..\37\177..\377");
     }
 }
