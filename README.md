@@ -1,22 +1,20 @@
-BC CIE extension README
+BC CIE
+======
 
 What is the BC CIE extension?
 ================================
 
-BC CIE is a true eZ Publish extension
-that provides cronjob parts, class methods
-and module views to provide easy export
-of collected informations from contentobjects
-into to csv or sylk (Excel) export files.
+BC CIE is a true eZ Publish extension that provides cronjob parts, class methods and module views to provide easy export of collected informations from content objects into to csv or sylk (Excel) export files.
 
-BC CIE version
+
+Version
 =======================
 
 The current version of BC CIE is 1.1.2
+
 Last Major update: May 20, 2015
 
-You can find details about changes for this
-version in doc/changelogs/CHANGELOG-1.1.2
+You can find details about changes for this version in [doc/changelogs/CHANGELOG-1.1.2](doc/changelogs/CHANGELOG-1.1.2)
 
 
 Copyright
@@ -24,14 +22,15 @@ Copyright
 
 BC CIE is copyright 1999 - 2015 Brookins Consulting and 2006 - 2007 Mathias VITALIS
 
-See: doc/COPYRIGHT for more information on the terms of the copyright and license
+See: [doc/COPYRIGHT](doc/COPYRIGHT) for more information on the terms of the copyright and license
+
 
 License
 =======
 
 BC CIE is licensed under the GNU General Public License.
 
-The complete license agreement is included in the doc/LICENSE file.
+The complete license agreement is included in the [LICENSE](LICENSE) file.
 
 BC CIE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -45,12 +44,12 @@ GNU General Public License for more details.
 
 The GNU GPL gives you the right to use, modify and redistribute
 BC CIE under certain conditions. The GNU GPL license
-is distributed with the software, see the file doc/LICENSE.
+is distributed with the software, see the file [LICENSE](LICENSE).
 
-It is also available at http://www.gnu.org/licenses/gpl.txt
+It is also available at [http://www.gnu.org/licenses/gpl.txt](http://www.gnu.org/licenses/gpl.txt)
 
 You should have received a copy of the GNU General Public License
-along with BC CIE in doc/LICENSE. If not, see http://www.gnu.org/licenses/.
+along with BC CIE in [LICENSE](LICENSE). If not, see [http://www.gnu.org/licenses/](http://www.gnu.org/licenses/).
 
 Using BC CIE under the terms of the GNU GPL is free (as in freedom).
 
@@ -62,19 +61,19 @@ Requirements
 
 The following requirements exists for using BC CIE extension:
 
-o  eZ Publish version:
+* eZ Publish version:
 
-   Make sure you use eZ Publish version 4.x (required) or higher. eZ Publish 4.6.x+ (Community Build, 2012.02+) is recommended.
+Make sure you use eZ Publish version 4.x (required) or higher. eZ Publish 4.6.x+ (Community Build, 2012.02+) is recommended.
 
-o  PHP version:
+* PHP version:
 
-   Make sure you have PHP 5.x or higher.
+Make sure you have PHP 5.x or higher.
 
 
 Installation
 ============
 
-Details on installing BC CIE located in the file doc/INSTALL.
+Details on installing BC CIE located in the file [doc/INSTALL](doc/INSTALL).
 
 
 Usage
@@ -89,12 +88,10 @@ Troubleshooting
 1. Read the FAQ
    ------------
 
-   Some problems are more common than others. The most common ones
-   are listed in the the doc/FAQ.
+Some problems are more common than others. The most common ones are listed in the the [doc/FAQ](doc/FAQ).
+
 
 2. Support
    -------
 
-   If you have find any problems not handled by this document or the FAQ you
-   can contact Brookins Consulting through the support system:
-   http://brookinsconsulting.com/contact
+If you have find any problems not handled by this document or the FAQ you can contact Brookins Consulting through the support system: [http://brookinsconsulting.com/contact](http://brookinsconsulting.com/contact)
