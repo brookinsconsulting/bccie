@@ -14,7 +14,7 @@ The current version of BC CIE is 1.1.2
 
 Last Major update: May 20, 2015
 
-You can find details about changes for this version in [doc/changelogs/CHANGELOG-1.1.2](doc/changelogs/CHANGELOG-1.1.2)
+You can find details about changes for this version in [doc/changelogs/CHANGELOG-1.1.2.md](doc/changelogs/CHANGELOG-1.1.2.md)
 
 
 Copyright

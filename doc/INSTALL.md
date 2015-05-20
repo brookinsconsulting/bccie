@@ -82,12 +82,14 @@ Installing BC CIE extension
 ===========================
 
 Copy the extension files into the extension directory
+
+
 ===========================
 
-Copy the package into the `extension' directory in the root of your eZ Publish installation.
+Copy the package into the `extension` directory in the root of your eZ Publish installation.
 
 
-2. Unpack the extension package files into the extension directory
+Unpack the extension package files into the extension directory
 ===========================
 
 Unpack the files in the distribution. The command necessary is depends on the file you downloaded.
@@ -101,7 +103,17 @@ Unpack the files in the distribution. The command necessary is depends on the fi
     unzip bccie-1_1_0.tar.zip
 
 
-3. (Optional) Git clone the latest GitHub brookinsconsulting bccie extension sources into the extension directory
+(Optional) Composer installation of the latest GitHub brookinsconsulting bccie extension sources into the extension directory
+===========================
+
+You can optionaly fetch the latest extension source code from GitHub brookinsconsulting bccie repository via composer into the extension directory
+
+    cd /path/to/ezpublish;
+    composer require brookinsconsulting/bccie dev-master;
+    sudo chmod -R 777 ../bccie;
+
+
+(Optional) Git clone the latest GitHub brookinsconsulting bccie extension sources into the extension directory
 ===========================
 
 You can optionaly fetch the latest extension source code from GitHub brookinsconsulting bccie repository into the extension directory
@@ -117,7 +129,7 @@ You can optionaly fetch the latest extension source code from GitHub brookinscon
     sudo chmod -R 777 ../bccie;
 
 
-3.1. (Optional) Git download the latest GitHub brookinsconsulting bccie extension sources into the extension directory
+(Optional) Git download the latest GitHub brookinsconsulting bccie extension sources into the extension directory
 ===========================
 
 You can optionaly fetch the latest extension source code from GitHub brookinsconsulting bccie repository into the extension directory. Download or clone and place the downloaded extension into your extension folder.
@@ -143,7 +155,7 @@ or
     sudo chmod -R 777 ../bccie;
 
 
-4. We must now enable the extension in eZ Publish.
+We must now enable the extension in eZ Publish.
 ===========================
 
 To do this edit site.ini.append(.php) in the folder
@@ -168,7 +180,7 @@ The extension can also be activated through eZ Publish admin interface.
 An additional new menu tab "BC CIE Export" will appear in your Admin-interface.
 
 
-5. Regenerate eZ Publish class autoloads
+Regenerate eZ Publish class autoloads
 ===========================
 
 You must regenerate autoloads for extension classes to be available via eZ Publish autoloads. This may mean running the following different commands.
@@ -178,12 +190,14 @@ You must regenerate autoloads for extension classes to be available via eZ Publi
     php bin/php/ezpgenerateautoloads.php -v -e;
 
 
-6. There is no need to configure BC CIE extension after activation
+There is no need to configure BC CIE extension after activation
 ===========================
 
 There are optional settings in settings/bccie.ini mostly workflow event specific. Create a settings override to customize these values.
 
-6.1. Configure optional setttings
+
+Configure optional settings
+============================
 
 There are optional settings in settings/bccie.ini which you can use to customize your use of the extension.
 
