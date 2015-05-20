@@ -52,6 +52,19 @@ $tpl->setVariable( 'module', $module );
 $tpl->setVariable( 'object', $object );
 $tpl->setVariable( 'collection_array', $collections );
 $tpl->setVariable( 'collection_count', $numberOfCollections );
+
+if( $numberOfCollections >= 1 )
+{
+    $createdTimestamp = $collections[0]->attribute( 'created' );
+    $startDay = date( 'd', $createdTimestamp );
+    $startMonth = date( 'm', $createdTimestamp );
+    $startYear = date( 'Y', $createdTimestamp );
+
+    $tpl->setVariable( 'start_day', $startDay );
+    $tpl->setVariable( 'start_month', $startMonth );
+    $tpl->setVariable( 'start_year', $startYear );
+}
+
 $tpl->setVariable( 'end_day', date( 'd' ) );
 $tpl->setVariable( 'end_month', date( 'm' ) );
 $tpl->setVariable( 'end_year', date( 'Y' ) );
