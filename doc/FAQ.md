@@ -7,6 +7,8 @@ The following custom datatypes are also supported by this extension:
 
 * [smileobjectrelationlistdatatype](https://github.com/arbito82/smileobjectrelationlistdatatype)
 
+* [owenhancedselection](https://github.com/Open-Wide/OWEnhancedSelection)
+
 
 # PLATFORM SPECIFIC NOTES
 
