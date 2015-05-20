@@ -12,17 +12,17 @@ into to csv or sylk (Excel) export files.
 BC CIE version
 =======================
 
-The current version of BC CIE is 1.1.0
-Last Major update: November 6, 2013
+The current version of BC CIE is 1.1.2
+Last Major update: May 20, 2015
 
 You can find details about changes for this
-version in doc/changelogs/CHANGELOG-1.1.0
+version in doc/changelogs/CHANGELOG-1.1.2
 
 
 Copyright
 =========
 
-BC CIE is copyright 1999 - 2014 Brookins Consulting and Mathias VITALIS
+BC CIE is copyright 1999 - 2015 Brookins Consulting and 2006 - 2007 Mathias VITALIS
 
 See: doc/COPYRIGHT for more information on the terms of the copyright and license
 
@@ -50,12 +50,11 @@ is distributed with the software, see the file doc/LICENSE.
 It is also available at http://www.gnu.org/licenses/gpl.txt
 
 You should have received a copy of the GNU General Public License
-along with BC CIE in doc/LICENSE.  If not, see http://www.gnu.org/licenses/.
+along with BC CIE in doc/LICENSE. If not, see http://www.gnu.org/licenses/.
 
 Using BC CIE under the terms of the GNU GPL is free (as in freedom).
 
-For more information or questions please contact
-license@brookinsconsulting.com
+For more information or questions please contact: license@brookinsconsulting.com
 
 
 Requirements
