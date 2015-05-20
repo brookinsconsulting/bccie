@@ -14,8 +14,6 @@ include_once( 'lib/ezutils/classes/ezhttptool.php' );
 include_once( 'extension/bccie/classes/parser.php' );
 include_once( 'lib/ezutils/classes/ezexecution.php' );
 
-header( "Content-type:text/csv; charset=utf-8" );
-
 $http = eZHTTPTool::instance();
 $module = $Params['Module'];
 $objectID = $Params['ObjectID'];
@@ -144,8 +142,6 @@ switch ( $export_type )
         break;
 }
 
-header( "Content-Disposition: attachment; filename=$filename" );
-
 $export_string = $parser->exportInformationCollection(
                         $collections,
                             $attributes_to_export,
@@ -156,7 +152,10 @@ $export_string = $parser->exportInformationCollection(
                             $exportModificationDate
 );
 
-print chr(255) . chr(254) . mb_convert_encoding($export_string, 'UTF-16LE', 'UTF-8');
+$exportFormatOutputHandler = bccieExportFormatOutputHandler::instance();
+$exportFormatOutputHandler->setOutputFileName( $filename );
+
+$exportFormatOutputHandler = $exportFormatOutputHandler->output( $export_string );
 
 flush();
 
