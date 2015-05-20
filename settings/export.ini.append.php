@@ -20,6 +20,7 @@ ExportableDatatypes[]=ezdate
 ExportableDatatypes[]=ezdatetime
 ExportableDatatypes[]=ezobjectrelation
 ExportableDatatypes[]=owenhancedselection
+ExportableDatatypes[]=smileobjectrelationlist
 
 # All handlerfiles are sought in the base directory,
 # extension/bccie/modules/bccie/,
@@ -101,5 +102,9 @@ OutputRelatedObjectNames=true
 [owenhancedselection]
 HandlerFile=owenhancedselectionhandler.php
 HandlerClass=OWEnhancedSelectionHandler
+
+[smileobjectrelationlist]
+HandlerFile=smileobjectrelationlisthandler.php
+HandlerClass=smileobjectrelationlistHandler
 
 */ ?>
