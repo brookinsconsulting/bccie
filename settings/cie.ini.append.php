@@ -56,4 +56,7 @@ SylkSeparator=;
 # string instead of "0" collected value
 ExportZeroToEmptyString=disabled
 
+ExportFileName=bccie_cie_export-
+ExportFileNameDateFormat=Y-m-d_H-i-s
+
 */ ?>

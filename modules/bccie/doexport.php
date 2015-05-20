@@ -2,7 +2,7 @@
 /**
  * File containing the doexport module view.
  *
- * @copyright Copyright (C) 1999 - 2014 Brookins Consulting. All rights reserved.
+ * @copyright Copyright (C) 1999 - 2015 Brookins Consulting. All rights reserved.
  * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2 (or any later version)
  * @version //autogentag//
  * @package bccie
@@ -19,6 +19,11 @@ header( "Content-type:text/csv; charset=utf-8" );
 $http = eZHTTPTool::instance();
 $module = $Params['Module'];
 $objectID = $Params['ObjectID'];
+
+$cieINI = eZINI::instance( 'cie.ini' );
+$exportFileName = $cieINI->variable( 'CieSettings', 'ExportFileName' );
+$exportFileNameDateFormat = $cieINI->variable( 'CieSettings', 'ExportFileNameDateFormat' );
+
 $object = false;
 $exportCreationDate = false;
 $exportModificationDate = false;
@@ -32,6 +37,8 @@ if ( !$object )
 {
     return $module->handleError( EZ_ERROR_KERNEL_NOT_AVAILABLE, 'kernel' );
 }
+
+$exportContentObjectName = strtolower( str_replace( ' ', '_', $object->attribute( 'name' ) ) );
 
 $conditions = array( 'contentobject_id' => $objectID );
 
@@ -89,6 +96,7 @@ if ( $http->hasPostVariable( "modification_date" ) )
 }
 
 set_time_limit( 180 );
+
 $collections = eZPersistentObject::fetchObjectList(
                                  eZInformationCollection::definition(),
                                      null,
@@ -121,18 +129,18 @@ $seperation_char = $http->postVariable( "separation_char" );
 $export_type = $http->postVariable( "export_type" );
 $parser = new Parser( $objectID );
 
-$date_export = date( "d-m-Y" );
+$date_export = date( $exportFileNameDateFormat );
 
 switch ( $export_type )
 {
     case 'csv':
-        $filename = "export_" . $date_export . ".csv";
+        $filename = $exportFileName . $exportContentObjectName . '-on-' . $date_export . ".csv";
         break;
     case 'sylk':
-        $filename = "export_" . $date_export . ".slk";
+        $filename = $exportFileName . $exportContentObjectName . '-on-' . $date_export . ".slk";
         break;
     default :
-        $filename = "export_" . $date_export . ".csv";
+        $filename = $exportFileName . $exportContentObjectName . '-on-' . $date_export . ".csv";
         break;
 }
 
