@@ -22,7 +22,7 @@ Copyright
 
 BC CIE is copyright 1999 - 2015 Brookins Consulting and 2006 - 2007 Mathias VITALIS
 
-See: [doc/COPYRIGHT](doc/COPYRIGHT) for more information on the terms of the copyright and license
+See: [doc/COPYRIGHT.md](doc/COPYRIGHT.md) for more information on the terms of the copyright and license
 
 
 License
@@ -73,7 +73,7 @@ Make sure you have PHP 5.x or higher.
 Installation
 ============
 
-Details on installing BC CIE located in the file [doc/INSTALL](doc/INSTALL).
+Details on installing BC CIE located in the file [doc/INSTALL.md](doc/INSTALL.md).
 
 
 Usage
@@ -85,13 +85,10 @@ Click the new "BC CIE Export" menu tab and follow the instructions on the page.
 Troubleshooting
 ===============
 
-1. Read the FAQ
-   ------------
+* Read the FAQ
 
-Some problems are more common than others. The most common ones are listed in the the [doc/FAQ](doc/FAQ).
+Some problems are more common than others. The most common ones are listed in the the [doc/FAQ.md](doc/FAQ.md).
 
-
-2. Support
-   -------
+* Support
 
 If you have find any problems not handled by this document or the FAQ you can contact Brookins Consulting through the support system: [http://brookinsconsulting.com/contact](http://brookinsconsulting.com/contact)
