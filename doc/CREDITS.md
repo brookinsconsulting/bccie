@@ -40,3 +40,20 @@ Released under the GNU General Public License v2 (or any later version)
 
 * Converted documentation into markdown format change from Brookins Consulting, [brookinsconsulting.com](http://brookinsconsulting.com)
 
+* cp1251 export format output handler idea from github.com/Open-Wide, implementation from Brookins Consulting, [brookinsconsulting.com](http://brookinsconsulting.com)
+
+* cie.ini setting DisplayLeaveEmptyOption idea from github.com/Open-Wide, implementation from Brookins Consulting, [brookinsconsulting.com](http://brookinsconsulting.com)
+
+* Various bugfixes and improvements from github.com/Open-Wide
+
+* Removed all deprecated ezp3 / php4 style class include 'include_once' calls. eZ Publish 3.x support for bccie is officially removed. From github.com/Open-Wide and [brookinsconsulting.com](http://brookinsconsulting.com)
+
+* Refactor to provide for using base handler as fallback during export when custom export datatype handler does not exist. From github.com/Open-Wide
+
+* Refactored original export.ini ExportableDatatypes datatype identifier settings and related datatype specific settings arrays to be sorted alphabetically. Idea from github.com/Open-Wide, implementation from Brookins Consulting, [brookinsconsulting.com](http://brookinsconsulting.com)
+
+* Added bccieExportUtils helper class, moved key overview and export functionality into it. From github.com/Open-Wide
+
+* Added cie.ini ExportExecutionTimeLimit setting which defaults to 180 seconds (previous static limitation). Implementation from Brookins Consulting, [brookinsconsulting.com](http://brookinsconsulting.com)
+
+* Added cie.ini setting ExportUsingDaysCalcualation disabled by default. Idea from github.com/Open-Wide, implementation from Brookins Consulting, [brookinsconsulting.com](http://brookinsconsulting.com)
