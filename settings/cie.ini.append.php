@@ -63,6 +63,7 @@ ExportOutputFormatHandlers[]
 ExportOutputFormatHandlers[utf8]=bccieExportFormatOutputHandlerUtf8
 ExportOutputFormatHandlers[utf8bom]=bccieExportFormatOutputHandlerUtf8Bom
 ExportOutputFormatHandlers[utf16le]=bccieExportFormatOutputHandlerUtf16Le
+ExportOutputFormatHandlers[cp1252]=bccieExportFormatOutputHandlerCP1252
 
 ExportOutputFormatHandlerDefault=utf8
 

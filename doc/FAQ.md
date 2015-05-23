@@ -43,3 +43,9 @@ Therefore the following modification was made within the bccieExportFormatOutput
     +echo $output;
 
 More information on this issue can be found here: [http://stackoverflow.com/questions/4348802/how-can-i-output-a-utf-8-csv-in-php-that-excel-will-read-properly](http://stackoverflow.com/questions/4348802/how-can-i-output-a-utf-8-csv-in-php-that-excel-will-read-properly)
+
+## Windows-1251 aka cp1252 output format handler
+
+Some users desired export in a windows specific output format so the bccieExportFormatOutputHandlerCP1252 was created.
+
+More information on this charset can be found here: [http://en.wikipedia.org/wiki/Windows-1252](http://en.wikipedia.org/wiki/Windows-1252), [http://www.cp1252.com](http://www.cp1252.com)
