@@ -21,6 +21,7 @@ Shown[default]=true
 Shown[edit]=true
 Shown[navigation]=true
 Shown[browse]=true
+PolicyList[]=bccie/read
 
 [Leftmenu_bccie_overview]
 Name=BC CIE
