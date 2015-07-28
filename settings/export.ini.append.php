@@ -99,7 +99,7 @@ HandlerFile=smileobjectrelationlisthandler.php
 HandlerClass=smileobjectrelationlistHandler
 
 [ezbirthday]
-HandlerFile=ezbirthdayhandler.php
-HandlerClass=eZBirthdayHandler
+HandlerFile=ezbirthdayexporthandler.php
+HandlerClass=eZBirthdayExportHandler
 
 */ ?>

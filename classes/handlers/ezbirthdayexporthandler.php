@@ -10,11 +10,11 @@
 
 include_once( 'extension/bccie/classes/basehandler.php' );
 
-class eZBirthdayHandler extends BaseHandler
+class eZBirthdayExportHandler extends BaseHandler
 {
     function exportAttribute( &$attribute, $seperationChar )
     {
-        return $this->escape( $attribute->content()->toString(), $seperationChar );
+        return $this->escape( $attribute->attribute( 'data_text' ), $seperationChar );
     }
 }
 
