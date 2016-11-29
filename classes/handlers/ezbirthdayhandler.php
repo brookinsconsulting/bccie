@@ -8,9 +8,7 @@
  * @package bccie
  */
 
-include_once( 'extension/bccie/classes/basehandler.php' );
-
-class eZBirthdayExportHandler extends BaseHandler
+class eZBirthdayHandler extends BaseHandler
 {
     function exportAttribute( &$attribute, $seperationChar )
     {
