@@ -8,8 +8,6 @@
  * @package bccie
  */
 
-include_once( 'extension/bccie/classes/basehandler.php' );
-
 class eZFloatHandler extends BaseHandler
 {
 

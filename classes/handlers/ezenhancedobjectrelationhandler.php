@@ -8,8 +8,6 @@
  * @package bccie
  */
 
-include_once( 'extension/bccie/classes/basehandler.php' );
-
 class ezenhancedobjectrelationHandler extends BaseHandler
 {
 
@@ -19,7 +17,7 @@ class ezenhancedobjectrelationHandler extends BaseHandler
         $id_list = $content['id_list'];
 
         $ini = eZINI::instance( "export.ini" );
-        if ( $ini->variable( "ezenhancedobjectrelation", "OutputRelatedObjectNames" ) )
+        if ( $ini->variable( "ezenhancedobjectrelation", "OutputRelatedObjectNames" )  !== 'false' )
         {
             $names = array();
             foreach ( $id_list as $id )

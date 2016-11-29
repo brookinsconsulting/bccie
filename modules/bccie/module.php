@@ -2,7 +2,7 @@
 /**
  * File containing the bccie module definition.
  *
- * @copyright Copyright (C) 1999 - 2014 Brookins Consulting. All rights reserved.
+ * @copyright Copyright (C) 1999 - 2015 Brookins Consulting. All rights reserved.
  * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2 (or any later version)
  * @version //autogentag//
  * @package bccie
@@ -27,7 +27,7 @@ $ViewList = array();
 $ViewList['overview'] = array(
     'script' => 'overview.php',
     'functions' => array( 'read' ),
-    'default_navigation_part' => 'bccie',
+    'default_navigation_part' => 'ezbccienavigationpart',
     'ui_context' => 'view', // 'ui_context' => 'administration',
     'unordered_params' => array( 'offset' => 'Offset' ),
     'single_post_actions' => array(
@@ -40,7 +40,7 @@ $ViewList['overview'] = array(
 $ViewList['export'] = array(
     'script' => 'export.php',
     'functions' => array( 'read' ),
-    'default_navigation_part' => 'bccienavigationpart',
+    'default_navigation_part' => 'ezbccienavigationpart',
     'ui_context' => 'view', // 'ui_context' => 'administration',
     'params' => array( 'ObjectID' ),
     'unordered_params' => array()
@@ -49,7 +49,7 @@ $ViewList['export'] = array(
 $ViewList['doexport'] = array(
     'script' => 'doexport.php',
     'functions' => array( 'read' ),
-    'default_navigation_part' => 'bccienavigationpart',
+    'default_navigation_part' => 'ezbccienavigationpart',
     'ui_context' => 'view',
     'params' => array( 'ObjectID' ),
     'unordered_params' => array()

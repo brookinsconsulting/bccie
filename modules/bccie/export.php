@@ -2,17 +2,11 @@
 /**
  * File containing the export module view.
  *
- * @copyright Copyright (C) 1999 - 2014 Brookins Consulting. All rights reserved.
+ * @copyright Copyright (C) 1999 - 2015 Brookins Consulting. All rights reserved.
  * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2 (or any later version)
  * @version //autogentag//
  * @package bccie
  */
-
-include_once( 'kernel/classes/ezcontentobject.php' );
-include_once( 'kernel/classes/ezinformationcollection.php' );
-include_once( 'kernel/common/template.php' );
-include_once( 'kernel/common/i18n.php' );
-// include_once( 'kernel/classes/ezpreferences.php' );
 
 $http = eZHTTPTool::instance();
 $module = $Params['Module'];
@@ -44,14 +38,32 @@ $collections = eZInformationCollection::fetchCollectionsList(
 
 $numberOfCollections = eZInformationCollection::fetchCollectionsCount( $objectID );
 
+$objects = bccieExportUtils::getObjectsWithCollectedInformation();
+$numberOfInfoCollectorObjects = bccieExportUtils::getCollectorObjectsCount();
+
 $viewParameters = array( 'offset' => $offset );
 $objectName = $object->attribute( 'name' );
 
 $tpl = eZTemplate::factory();
 $tpl->setVariable( 'module', $module );
 $tpl->setVariable( 'object', $object );
+$tpl->setVariable( 'object_array', $objects );
+$tpl->setVariable( 'object_count', $numberOfInfoCollectorObjects );
 $tpl->setVariable( 'collection_array', $collections );
 $tpl->setVariable( 'collection_count', $numberOfCollections );
+
+if( $numberOfCollections >= 1 )
+{
+    $createdTimestamp = $collections[0]->attribute( 'created' );
+    $startDay = date( 'd', $createdTimestamp );
+    $startMonth = date( 'm', $createdTimestamp );
+    $startYear = date( 'Y', $createdTimestamp );
+
+    $tpl->setVariable( 'start_day', $startDay );
+    $tpl->setVariable( 'start_month', $startMonth );
+    $tpl->setVariable( 'start_year', $startYear );
+}
+
 $tpl->setVariable( 'end_day', date( 'd' ) );
 $tpl->setVariable( 'end_month', date( 'm' ) );
 $tpl->setVariable( 'end_year', date( 'Y' ) );
@@ -59,6 +71,7 @@ $tpl->setVariable( 'end_year', date( 'Y' ) );
 $Result = array();
 $Result['content'] = $tpl->fetch( 'design:bccie/export.tpl' );
 $Result['navigation_part'] = 'ezbccienavigationpart';
+$Result['left_menu'] = 'design:bccie/export_menu.tpl';
 $Result['path'] = array(
     array(
         'url' => '/bccie/overview',
