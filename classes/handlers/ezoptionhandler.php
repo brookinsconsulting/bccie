@@ -8,9 +8,6 @@
  * @package bccie
  */
 
-include_once( 'extension/bccie/classes/parser.php' );
-include_once( 'extension/bccie/classes/basehandler.php' );
-
 class eZOptionHandler extends BaseHandler
 {
 

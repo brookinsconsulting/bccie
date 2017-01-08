@@ -8,18 +8,14 @@
  * @package bccie
  */
 
-include_once( 'lib/ezutils/classes/ezini.php' );
-include_once( 'extension/bccie/classes/basehandler.php' );
-include_once( 'kernel/classes/ezcontentobjecttreenode.php' );
-
 class Parser
 {
 
     var $handlerMap = array();
     var $exportableDatatypes;
     var $contentClassCollectorAttributes;
-    var $exportCreationDate;
-    var $exportModificationDate;
+    var $exportCreationDate = false;
+    var $exportModificationDate = false;
 
     function Parser( $objectID = false )
     {
@@ -28,17 +24,15 @@ class Parser
 
         foreach ( $this->exportableDatatypes as $typename )
         {
-            include_once( "extension/bccie/classes/" . $ini->variable( $typename, 'HandlerFile' ) );
-
             $classname = $ini->variable( $typename, 'HandlerClass' );
             $handler = new $classname;
             $this->handlerMap[$typename] = array( "handler" => $handler, "exportable" => true );
         }
 
         /*
-            if ($objectID)
+            if ( $objectID )
             {
-                $this->getContentClassCollectorAttributes($objectID);
+                $this->getContentClassCollectorAttributes( $objectID );
             }
         */
     }
@@ -62,9 +56,14 @@ class Parser
     function exportAttribute( &$attribute, $seperationChar )
     {
         $ret = false;
-        $handler = $this->handlerMap[eZContentClassAttribute::dataTypeByID(
-                                                            $attribute->ContentClassAttributeID
-        )]['handler'];
+        $datatypeName = eZContentClassAttribute::dataTypeByID( $attribute->ContentClassAttributeID );
+
+        if ( array_key_exists( $datatypeName, $this->handlerMap ) )
+        {
+            $handler = $this->handlerMap[$datatypeName]['handler'];
+        } else {
+            $handler = new BaseHandler();
+        }
 
         /*
         BC: Error Debug Comment Test Case Output
@@ -136,14 +135,13 @@ class Parser
 
         foreach ( $attributes_to_export as $classAttributeID )
         {
-            if ( is_numeric( $classAttributeID ) )
+            $contentClassAttribute = eZContentClassAttribute::fetch( $classAttributeID );
+
+            if ( $contentClassAttribute instanceof eZContentClassAttribute )
             {
                 array_push(
                     $resultstring,
-                    $this->exportAttributeHeader(
-                         eZContentClassAttribute::fetch( $classAttributeID ),
-                             $seperationChar
-                    )
+                    $this->exportAttributeHeader( $contentClassAttribute, $seperationChar )
                 );
             }
         }
@@ -152,14 +150,14 @@ class Parser
         {
             array_push(
                 $resultstring,
-                ezpI18n::tr( "design/bccie/export", "created" )
+                ezpI18n::tr( "design/bccie/export", "Created" )
             );
         }
         if ( $this->getModificationDate() === true )
         {
             array_push(
                 $resultstring,
-                ezpI18n::tr( "design/bccie/export", "modified" )
+                ezpI18n::tr( "design/bccie/export", "Modified" )
             );
         }
 
@@ -256,7 +254,7 @@ class Parser
         $attributes_to_export,
         $seperationChar,
         $export_type = 'csv',
-        $days,
+        $days = false,
         $creation_date = false,
         $modification_date = false
     )
@@ -656,21 +654,21 @@ class Parser
 
     public function setModificationDate( $date )
     {
-        $this->modificationDate = $date;
+        $this->exportModificationDate = $date;
     }
 
     public function setCreationDate( $date )
     {
-        $this->creationDate = $date;
+        $this->exportCreationDate = $date;
     }
 
     public function getCreationDate()
     {
-        return $this->creationDate;
+        return $this->exportCreationDate;
     }
     public function getModificationDate()
     {
-        return $this->modificationDate;
+        return $this->exportModificationDate;
     }
 }
 

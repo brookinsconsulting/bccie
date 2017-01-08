@@ -1,3 +1,4 @@
+{def $display_leave_empty_option=ezini( 'CieSettings', 'DisplayLeaveEmptyOption', 'cie.ini' )|eq( 'enabled' )}
 <form name="collections" method="post" action={concat( '/bccie/doexport/', $object.id )|ezurl}>
 
 {let number_of_items=min( ezpreference( 'admin_infocollector_list_limit' ), 3)|choose( 10, 10, 25, 50 )}
@@ -102,7 +103,9 @@
                                 {/section}
                         {/let}
                 {/section}
+                {if $display_leave_empty_option}
                 <option value="-1"> {'Leave empty (note: field still gets created)'|i18n('design/bccie/export')} </option>
+                {/if}
                 <option value="-2"> {"Ignore (note: field doesn't get created at all)"|i18n('design/bccie/export')} </option>
             </select>
         </fieldset>
@@ -127,7 +130,9 @@
                                                         {/section}
                                                 {/let}
                                         {/section}
+                                        {if $display_leave_empty_option}
                                         <option value="-1"> {'Leave empty (note: field still gets created)'|i18n('design/bccie/export')} </option>
+                                        {/if}
                                         <option value="-2"> {"Ignore (note: field doesn't get created at all)"|i18n('design/bccie/export')} </option>
                                      </select>
                                 </fieldset>
