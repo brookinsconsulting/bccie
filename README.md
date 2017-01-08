@@ -10,17 +10,17 @@ BC CIE is a true eZ Publish extension that provides cronjob parts, class methods
 Version
 =======================
 
-The current version of BC CIE is 1.1.2
+The current version of BC CIE is 1.1.3
 
-Last Major update: May 20, 2015
+Last Major update: January 07, 2017
 
-You can find details about changes for this version in [doc/changelogs/CHANGELOG-1.1.2.md](doc/changelogs/CHANGELOG-1.1.2.md)
+You can find details about changes for this version in [doc/changelogs/CHANGELOG-1.1.3.md](doc/changelogs/CHANGELOG-1.1.3.md)
 
 
 Copyright
 =========
 
-BC CIE is copyright 1999 - 2015 Brookins Consulting and 2006 - 2007 Mathias VITALIS
+BC CIE is copyright 1999 - 2017 Brookins Consulting and 2006 - 2007 Mathias VITALIS
 
 See: [doc/COPYRIGHT.md](doc/COPYRIGHT.md) for more information on the terms of the copyright and license
 

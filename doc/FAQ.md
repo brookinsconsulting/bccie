@@ -9,6 +9,8 @@ The following custom datatypes are also supported by this extension:
 
 * [owenhancedselection](https://github.com/Open-Wide/OWEnhancedSelection)
 
+* [ezbirthday](https://github.com/netgen/birthday)
+
 
 # PLATFORM SPECIFIC NOTES
 

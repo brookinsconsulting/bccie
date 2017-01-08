@@ -57,3 +57,5 @@ Released under the GNU General Public License v2 (or any later version)
 * Added cie.ini ExportExecutionTimeLimit setting which defaults to 180 seconds (previous static limitation). Implementation from Brookins Consulting, [brookinsconsulting.com](http://brookinsconsulting.com)
 
 * Added cie.ini setting ExportUsingDaysCalcualation disabled by default. Idea from github.com/Open-Wide, implementation from Brookins Consulting, [brookinsconsulting.com](http://brookinsconsulting.com)
+
+* Added support for ezbirthday datatype enabled by default. Implementation from github.com/punknroll

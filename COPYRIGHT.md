@@ -1,4 +1,4 @@
-Copyright © 1999 - 2015 Brookins Consulting (United States of America)
+Copyright © 1999 - 2017 Brookins Consulting (United States of America)
 
 Copyright © 2006 - 2007 Vitalis Mathias
 

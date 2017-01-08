@@ -2,7 +2,7 @@
     "name": "brookinsconsulting/bccie",
     "description": "eZ Publish Legacy extension which provides a flexible solution for quick and simple export of collected information content in csv or sylk formatted files with eZ Publish Legacy. Great for reports!",
     "type": "ezpublish-legacy-extension",
-    "keywords": [ "eZ Publish", "cie", "csv", "sylk", "export", "report", "reports" ],
+    "keywords": [ "eZ Publish", "cie", "csv", "sylk", "export", "report", "reports", "utf8" ],
     "homepage": "https://github.com/brookinsconsulting/bccie",
     "license": "GPL-2.0+",
     "authors": [
