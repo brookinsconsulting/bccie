@@ -87,7 +87,7 @@ Troubleshooting
 
 * Read the FAQ
 
-Some problems are more common than others. The most common ones are listed in the the [doc/FAQ.md](doc/FAQ.md).
+Some problems are more common than others. The most common ones are listed in the [doc/FAQ.md](doc/FAQ.md).
 
 * Support
 
